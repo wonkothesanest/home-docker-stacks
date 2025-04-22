@@ -1,0 +1,20 @@
+[2025-02-19 14:21:26] info: 	z2m: Logging to console, file (filename: log.log)
+[2025-02-19 14:21:26] info: 	z2m: Starting Zigbee2MQTT version 2.1.1 (commit #1accb8b66b95b99658c50e4c0209edcb946a5fe2)
+[2025-02-19 14:21:26] info: 	z2m: Starting zigbee-herdsman (3.2.5)
+[2025-02-19 14:21:26] info: 	zh:adapter:discovery: Matched adapter: {"path":"/dev/ttyUSB0","manufacturer":"ITead","serialNumber":"2ce7b14df766ec11b1a42142ef680de7","pnpId":"usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_2ce7b14df766ec11b1a42142ef680de7-if00-port0","vendorId":"10c4","productId":"ea60"} => zstack: path=/dev/ttyUSB0, score=4
+[2025-02-19 14:21:26] info: 	zh:zstack:znp: Opening SerialPort with {"path":"/dev/ttyUSB0","baudRate":115200,"rtscts":false,"autoOpen":false}
+[2025-02-19 14:21:26] info: 	zh:zstack:znp: Serialport opened
+[2025-02-19 14:21:26] info: 	z2m: zigbee-herdsman started (resumed)
+[2025-02-19 14:21:26] info: 	z2m: Coordinator firmware version: '{"meta":{"maintrel":1,"majorrel":2,"minorrel":7,"product":1,"revision":20230507,"transportrev":2},"type":"zStack3x0"}'
+[2025-02-19 14:21:26] info: 	z2m: Temperature Office (0xa4c138d142fa6125): WSD500A - Tuya Temperature & humidity sensor (EndDevice)
+[2025-02-19 14:21:26] info: 	z2m: Currently 1 devices are joined.
+[2025-02-19 14:21:26] info: 	z2m: Connecting to MQTT server at mqtt://mosquitto:1883
+[2025-02-19 14:21:27] info: 	z2m: Connected to MQTT server
+[2025-02-19 14:21:27] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/bridge/state', payload '{"state":"online"}'
+[2025-02-19 14:21:27] info: 	z2m: Started frontend on port 8080
+[2025-02-19 14:21:27] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"battery":null,"humidity":19.32,"linkquality":null,"temperature":23.02,"voltage":null}'
+[2025-02-19 14:21:27] info: 	z2m: Zigbee2MQTT started!
+[2025-02-19 14:21:32] info: 	z2m:mqtt: MQTT publish: topic 'homeassistant/binary_sensor/1221051039810110150109113116116_0x00124b0024c3d00b/connection_state/config', payload '{"device":{"hw_version":"zStack3x0 20230507","identifiers":["zigbee2mqtt_bridge_0x00124b0024c3d00b"],"manufacturer":"Zigbee2MQTT","model":"Bridge","name":"Zigbee2MQTT Bridge","sw_version":"2.1.1"},"device_class":"connectivity","entity_category":"diagnostic","name":"Connection state","object_id":"zigbee2mqtt_bridge_connection_state","origin":{"name":"Zigbee2MQTT","sw":"2.1.1","url":"https://www.zigbee2mqtt.io"},"payload_off":"offline","payload_on":"online","state_topic":"zigbee2mqtt/bridge/state","unique_id":"bridge_0x00124b0024c3d00b_connection_state_zigbee2mqtt","value_template":"{{ value_json.state }}"}'
+[2025-02-19 14:22:34] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/bridge/state', payload '{"state":"offline"}'
+[2025-02-19 14:22:34] info: 	z2m: Disconnecting from MQTT server
+[2025-02-19 14:22:34] info: 	z2m: Stopping zigbee-herdsman...

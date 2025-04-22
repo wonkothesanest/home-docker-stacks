@@ -1,0 +1,67 @@
+[2025-02-19 14:01:46] info: 	z2m: Logging to console, file (filename: log.log)
+[2025-02-19 14:01:46] info: 	z2m: Starting Zigbee2MQTT version 2.1.1 (commit #1accb8b66b95b99658c50e4c0209edcb946a5fe2)
+[2025-02-19 14:01:46] info: 	z2m: Starting zigbee-herdsman (3.2.5)
+[2025-02-19 14:01:46] info: 	zh:adapter:discovery: Matched adapter: {"path":"/dev/ttyUSB0","manufacturer":"ITead","serialNumber":"2ce7b14df766ec11b1a42142ef680de7","pnpId":"usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_2ce7b14df766ec11b1a42142ef680de7-if00-port0","vendorId":"10c4","productId":"ea60"} => zstack: path=/dev/ttyUSB0, score=4
+[2025-02-19 14:01:46] info: 	zh:zstack:znp: Opening SerialPort with {"path":"/dev/ttyUSB0","baudRate":115200,"rtscts":false,"autoOpen":false}
+[2025-02-19 14:01:46] info: 	zh:zstack:znp: Serialport opened
+[2025-02-19 14:01:46] info: 	z2m: zigbee-herdsman started (resumed)
+[2025-02-19 14:01:46] info: 	z2m: Coordinator firmware version: '{"meta":{"maintrel":1,"majorrel":2,"minorrel":7,"product":1,"revision":20230507,"transportrev":2},"type":"zStack3x0"}'
+[2025-02-19 14:01:46] info: 	z2m: Currently 0 devices are joined.
+[2025-02-19 14:01:46] info: 	z2m: Connecting to MQTT server at mqtt://mosquitto:1883
+[2025-02-19 14:01:46] info: 	z2m: Connected to MQTT server
+[2025-02-19 14:01:46] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/bridge/state', payload '{"state":"online"}'
+[2025-02-19 14:01:46] info: 	z2m: Started frontend on port 8080
+[2025-02-19 14:01:46] info: 	z2m: Zigbee2MQTT started!
+[2025-02-19 14:02:33] info: 	z2m: Zigbee: allowing new devices to join.
+[2025-02-19 14:02:33] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/bridge/response/permit_join', payload '{"data":{"time":254},"status":"ok","transaction":"xv67m-1"}'
+[2025-02-19 14:03:05] info: 	zh:controller: Interview for '0xa4c138d142fa6125' started
+[2025-02-19 14:03:05] info: 	z2m: Device '0xa4c138d142fa6125' joined
+[2025-02-19 14:03:05] info: 	z2m: Starting interview of '0xa4c138d142fa6125'
+[2025-02-19 14:03:05] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/bridge/event', payload '{"data":{"friendly_name":"0xa4c138d142fa6125","ieee_address":"0xa4c138d142fa6125"},"type":"device_joined"}'
+[2025-02-19 14:03:05] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/bridge/event', payload '{"data":{"friendly_name":"0xa4c138d142fa6125","ieee_address":"0xa4c138d142fa6125","status":"started"},"type":"device_interview"}'
+[2025-02-19 14:03:05] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/bridge/event', payload '{"data":{"friendly_name":"0xa4c138d142fa6125","ieee_address":"0xa4c138d142fa6125"},"type":"device_announce"}'
+[2025-02-19 14:03:06] info: 	zh:controller:device: Device '0xa4c138d142fa6125' is only compliant to revision '21' of the ZigBee specification (current revision: 23).
+[2025-02-19 14:03:12] info: 	zh:controller: Succesfully interviewed '0xa4c138d142fa6125'
+[2025-02-19 14:03:12] info: 	z2m: Successfully interviewed '0xa4c138d142fa6125', device has successfully been paired
+[2025-02-19 14:03:12] info: 	z2m: Device '0xa4c138d142fa6125' is supported, identified as: Tuya Temperature & humidity sensor (WSD500A)
+[2025-02-19 14:03:12] info: 	z2m: Configuring '0xa4c138d142fa6125'
+[2025-02-19 14:03:12] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/bridge/event', payload '{"data":{"definition":{"description":"Temperature & humidity sensor","exposes":[{"access":1,"category":"diagnostic","description":"Remaining battery in %, can take up to 24 hours before reported","label":"Battery","name":"battery","property":"battery","type":"numeric","unit":"%","value_max":100,"value_min":0},{"access":1,"description":"Measured temperature value","label":"Temperature","name":"temperature","property":"temperature","type":"numeric","unit":"°C"},{"access":1,"description":"Measured relative humidity","label":"Humidity","name":"humidity","property":"humidity","type":"numeric","unit":"%"},{"access":1,"category":"diagnostic","description":"Voltage of the battery in millivolts","label":"Voltage","name":"voltage","property":"voltage","type":"numeric","unit":"mV"},{"access":1,"category":"diagnostic","description":"Link quality (signal strength)","label":"Linkquality","name":"linkquality","property":"linkquality","type":"numeric","unit":"lqi","value_max":255,"value_min":0}],"model":"WSD500A","options":[{"access":2,"description":"Calibrates the temperature value (absolute offset), takes into effect on next report of device.","label":"Temperature calibration","name":"temperature_calibration","property":"temperature_calibration","type":"numeric"},{"access":2,"description":"Number of digits after decimal point for temperature, takes into effect on next report of device. This option can only decrease the precision, not increase it.","label":"Temperature precision","name":"temperature_precision","property":"temperature_precision","type":"numeric","value_max":3,"value_min":0},{"access":2,"description":"Calibrates the humidity value (absolute offset), takes into effect on next report of device.","label":"Humidity calibration","name":"humidity_calibration","property":"humidity_calibration","type":"numeric"},{"access":2,"description":"Number of digits after decimal point for humidity, takes into effect on next report of device. This option can only decrease the precision, not increase it.","label":"Humidity precision","name":"humidity_precision","property":"humidity_precision","type":"numeric","value_max":3,"value_min":0}],"supports_ota":false,"vendor":"Tuya"},"friendly_name":"0xa4c138d142fa6125","ieee_address":"0xa4c138d142fa6125","status":"successful","supported":true},"type":"device_interview"}'
+[2025-02-19 14:03:13] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/0xa4c138d142fa6125', payload '{"linkquality":40,"temperature":22.99}'
+[2025-02-19 14:03:13] info: 	z2m: Successfully configured '0xa4c138d142fa6125'
+[2025-02-19 14:03:14] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/0xa4c138d142fa6125', payload '{"linkquality":43,"temperature":22.99}'
+[2025-02-19 14:03:14] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/0xa4c138d142fa6125', payload '{"humidity":20.25,"linkquality":40,"temperature":22.99}'
+[2025-02-19 14:03:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/0xa4c138d142fa6125', payload '{"humidity":20.25,"linkquality":40,"temperature":22.99}'
+[2025-02-19 14:03:18] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/0xa4c138d142fa6125', payload '{"humidity":20.33,"linkquality":40,"temperature":22.99}'
+[2025-02-19 14:03:23] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/0xa4c138d142fa6125', payload '{"humidity":20.33,"linkquality":40,"temperature":22.99}'
+[2025-02-19 14:03:23] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/0xa4c138d142fa6125', payload '{"humidity":20.21,"linkquality":40,"temperature":22.99}'
+[2025-02-19 14:03:28] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/0xa4c138d142fa6125', payload '{"humidity":20.21,"linkquality":32,"temperature":22.99}'
+[2025-02-19 14:03:28] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/0xa4c138d142fa6125', payload '{"humidity":20.03,"linkquality":36,"temperature":22.99}'
+[2025-02-19 14:03:32] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/0xa4c138d142fa6125', payload ''
+[2025-02-19 14:03:32] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":20.03,"linkquality":36,"temperature":22.99}'
+[2025-02-19 14:03:32] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/bridge/response/device/rename', payload '{"data":{"from":"0xa4c138d142fa6125","homeassistant_rename":false,"to":"Temperature Office"},"status":"ok","transaction":"xv67m-2"}'
+[2025-02-19 14:03:33] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":20.03,"linkquality":40,"temperature":22.99}'
+[2025-02-19 14:03:33] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.9,"linkquality":43,"temperature":22.99}'
+[2025-02-19 14:03:38] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.9,"linkquality":43,"temperature":22.99}'
+[2025-02-19 14:03:38] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.79,"linkquality":47,"temperature":22.99}'
+[2025-02-19 14:03:43] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.79,"linkquality":43,"temperature":22.99}'
+[2025-02-19 14:03:43] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.73,"linkquality":43,"temperature":22.99}'
+[2025-02-19 14:03:48] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.73,"linkquality":40,"temperature":22.99}'
+[2025-02-19 14:03:48] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.65,"linkquality":43,"temperature":22.99}'
+[2025-02-19 14:03:53] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.65,"linkquality":40,"temperature":22.99}'
+[2025-02-19 14:03:53] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.59,"linkquality":40,"temperature":22.99}'
+[2025-02-19 14:03:58] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.59,"linkquality":40,"temperature":23.02}'
+[2025-02-19 14:03:58] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.52,"linkquality":40,"temperature":23.02}'
+[2025-02-19 14:04:03] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.52,"linkquality":47,"temperature":23.02}'
+[2025-02-19 14:04:03] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.43,"linkquality":43,"temperature":23.02}'
+[2025-02-19 14:04:08] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.43,"linkquality":43,"temperature":23.02}'
+[2025-02-19 14:04:08] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.37,"linkquality":43,"temperature":23.02}'
+[2025-02-19 14:04:13] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.37,"linkquality":43,"temperature":23.02}'
+[2025-02-19 14:04:13] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/Temperature Office', payload '{"humidity":19.32,"linkquality":43,"temperature":23.02}'
+[2025-02-19 14:09:01] info: 	z2m:mqtt: MQTT publish: topic 'zigbee2mqtt/bridge/state', payload '{"state":"offline"}'
+[2025-02-19 14:09:01] info: 	z2m: Disconnecting from MQTT server
+[2025-02-19 14:09:01] info: 	z2m: Stopping zigbee-herdsman...
+[2025-02-19 14:09:11] info: 	zh:controller: Wrote coordinator backup to '/app/data/coordinator_backup.json'
+[2025-02-19 14:09:11] info: 	zh:zstack:znp: closing
+[2025-02-19 14:09:11] info: 	zh:zstack:znp: Port closed
+[2025-02-19 14:09:11] info: 	z2m: Stopped zigbee-herdsman
+[2025-02-19 14:09:11] info: 	z2m: Stopped Zigbee2MQTT

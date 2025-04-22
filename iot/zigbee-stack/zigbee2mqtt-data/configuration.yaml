@@ -1,0 +1,71 @@
+version: 4
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://mosquitto:1883
+serial:
+  port: /dev/ttyUSB0
+advanced:
+  channel: 11
+  network_key:
+    - 233
+    - 235
+    - 219
+    - 15
+    - 220
+    - 177
+    - 20
+    - 151
+    - 192
+    - 36
+    - 17
+    - 84
+    - 139
+    - 255
+    - 203
+    - 129
+  pan_id: 43770
+  ext_pan_id:
+    - 104
+    - 140
+    - 101
+    - 224
+    - 241
+    - 86
+    - 180
+    - 240
+  last_seen: ISO_8601
+frontend:
+  enabled: true
+homeassistant:
+  enabled: true
+devices:
+  '0xa4c138d142fa6125':
+    friendly_name: Temperature Office
+    icon: device_icons/ddd05fe2ed7c1fbb69d67af7f2ca578a.png
+  '0xa4c138695f3b3476':
+    friendly_name: Temperature Livingroom
+    icon: device_icons/ddd05fe2ed7c1fbb69d67af7f2ca578a.png
+  '0xa4c138f845ec194a':
+    friendly_name: Temperature Pantry
+    icon: device_icons/ddd05fe2ed7c1fbb69d67af7f2ca578a.png
+  '0x00124b00293268a9':
+    friendly_name: Motion 1
+    icon: device_icons/dee8b1ef0477b23e31ea835bad999eb5.png
+  '0x00124b0029328998':
+    friendly_name: Motion 2
+    icon: device_icons/dee8b1ef0477b23e31ea835bad999eb5.png
+  '0x282c02bfffecabb5':
+    friendly_name: Plug 1
+    icon: device_icons/2822b03dc09b74ebd0764c0622c787f0.png
+  '0xa4c1388989ae7797':
+    friendly_name: Temperature chickens!
+  '0x282c02bfffee2a4b':
+    friendly_name: Plug 4
+  '0x282c02bfffec9a39':
+    friendly_name: Plug 2
+  '0x282c02bfffecf0c6':
+    friendly_name: Plug 3
+  '0xa4c138322c1c566d':
+    friendly_name: Temperature Green House
+  '0x00158d008b6980d9':
+    friendly_name: Gate Contact Sensor

@@ -1,0 +1,132 @@
+{
+    "0xa4c138d142fa6125": {
+        "temperature": 21.89,
+        "humidity": 26.27,
+        "linkquality": 185,
+        "voltage": 3000,
+        "battery": 100,
+        "last_seen": "2025-04-22T05:55:07.016Z"
+    },
+    "0xa4c138695f3b3476": {
+        "voltage": 2900,
+        "battery": 100,
+        "temperature": 22.5,
+        "humidity": 25.63,
+        "linkquality": 83,
+        "last_seen": "2025-04-22T05:42:16.486Z"
+    },
+    "0xa4c138f845ec194a": {
+        "temperature": 21.35,
+        "humidity": 25.53,
+        "linkquality": 185,
+        "voltage": 3000,
+        "battery": 100,
+        "last_seen": "2025-04-22T05:42:23.862Z"
+    },
+    "0x00124b00293268a9": {
+        "battery": 100,
+        "voltage": 3000,
+        "occupancy": true,
+        "battery_low": false,
+        "linkquality": 80,
+        "last_seen": "2025-04-22T05:45:04.747Z"
+    },
+    "0x00124b0029328998": {
+        "battery": 100,
+        "voltage": 3000,
+        "occupancy": true,
+        "battery_low": false,
+        "linkquality": 83,
+        "last_seen": "2025-03-15T06:00:10.577Z"
+    },
+    "0x282c02bfffecabb5": {
+        "voltage": 119.5,
+        "ac_frequency": 60,
+        "update": {
+            "state": "idle",
+            "installed_version": 268513372,
+            "latest_version": 268513372
+        },
+        "state": "OFF",
+        "energy": 1.7,
+        "linkquality": 76,
+        "power_factor": 0,
+        "current": 0,
+        "power": 0,
+        "last_seen": "2025-04-22T15:28:24.914Z"
+    },
+    "0xa4c1388989ae7797": {
+        "last_seen": "2025-04-22T05:57:37.872Z",
+        "temperature": 26.95,
+        "linkquality": 18,
+        "humidity": 30.84,
+        "voltage": 2900,
+        "battery": 100
+    },
+    "0x282c02bfffee2a4b": {
+        "voltage": 118.7,
+        "ac_frequency": 60,
+        "update": {
+            "state": "idle",
+            "installed_version": 268513372,
+            "latest_version": 268513372
+        },
+        "energy": 29.82,
+        "power_factor": 0.74,
+        "current": 0.71,
+        "power": 62.2,
+        "last_seen": "2025-04-22T05:57:17.407Z",
+        "linkquality": 182,
+        "state": "ON"
+    },
+    "0x282c02bfffec9a39": {
+        "voltage": 119,
+        "ac_frequency": 60,
+        "update": {
+            "state": "idle",
+            "installed_version": 268513372,
+            "latest_version": 268513372
+        },
+        "energy": 2.75,
+        "state": "ON",
+        "power_factor": 0.45,
+        "current": 0.04,
+        "power": 1.4,
+        "last_seen": "2025-04-22T05:56:24.998Z",
+        "linkquality": 18
+    },
+    "0x282c02bfffecf0c6": {
+        "voltage": 118.3,
+        "ac_frequency": 60,
+        "update": {
+            "state": "idle",
+            "installed_version": 268513372,
+            "latest_version": 268513372
+        },
+        "energy": 0.11,
+        "state": "ON",
+        "power": 0,
+        "current": 0,
+        "power_factor": 0,
+        "last_seen": "2025-04-22T05:57:26.478Z",
+        "linkquality": 189
+    },
+    "0xa4c138322c1c566d": {
+        "voltage": 3000,
+        "battery": 100,
+        "temperature": 25.33,
+        "humidity": 24.26,
+        "last_seen": "2025-04-22T05:47:50.409Z",
+        "linkquality": 185
+    },
+    "0x00158d008b6980d9": {
+        "contact": true,
+        "voltage": 3095,
+        "battery": 100,
+        "device_temperature": 30,
+        "power_outage_count": 144,
+        "trigger_count": 18,
+        "last_seen": "2025-04-22T05:41:51.485Z",
+        "linkquality": 61
+    }
+}

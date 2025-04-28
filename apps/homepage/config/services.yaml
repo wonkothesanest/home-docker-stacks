@@ -1,33 +1,37 @@
----
-# For configuration options and examples, please see:
-# https://gethomepage.dev/configs/services/
+- Server:
+    - Prefect:
+        description: Prefect Server
+        icon: apache-airflow
+        href: http://wonko.local:4200/dashboard
+    - Elasticsearch:
+        icon: elasticsearch
+        href: http://wonko.local:9200
+    - Kibana:
+        icon: kibana
+        href: http://wonko.local:5601
+    - n8n:
+        icon: n8n
+        href: http://wonko.local:5678/home/workflows
+    - Neo4j Browser:
+        icon: neo4j
+        href: http://wonko.local:7474
+    - Neo4j Bolt:
+        icon: neo4j
+        href: http://wonko.local:7687
+    - Neodash:
+        icon: neo4j
+        href: http://wonko.local:5005
 
-- Server: Wonko
-  icon: mdi:server
-  items:
-    - name: Prefect Server
-      url: http://wonko.local:4200/dashboard
-    - name: Elasticsearch
-      url: http://wonko.local:9200
-    - name: Kibana
-      url: http://wonko.local:5601
-    - name: n8n
-      url: http://wonko.local:5678/home/workflows
-    - name: Neo4j Browser
-      url: http://wonko.local:7474
-    - name: Neo4j Bolt
-      url: http://wonko.local:7687
-    - name: Neodash
-      url: http://wonko.local:5005
-
-- Server: OrangePi5B
-  icon: mdi:server-network
-  items:
-    - name: OpenHAB
-      url: http://orangepi5b.local:8080
-    - name: Portainer
-      url: https://orangepi5b.local:9443/
-    - name: Zigbee2MQTT
-      url: http://orangepi5b.local:8081/
-    - name: Mosquitto MQTT Broker
-      url: http://orangepi5b.local:9002/
+- OrangePi5B:
+    - OpenHAB:
+        icon: openhab
+        href: http://orangepi5b.local:8080
+    - Portainer:
+        icon: portainer
+        href: https://orangepi5b.local:9443/
+    - Zigbee2MQTT:
+        icon: zigbee2mqtt
+        href: http://orangepi5b.local:8081/
+    - Mosquitto MQTT Broker:
+        icon: mqtt
+        href: http://orangepi5b.local:9002/

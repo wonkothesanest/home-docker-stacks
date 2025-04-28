@@ -10,3 +10,10 @@
 - search:
     provider: duckduckgo
     target: _blank
+- portainer:
+    type: portainer
+    url: "http://orangepi5b.local:9000"
+    env: 3 #Future add in 6 here for wonko.local:9000
+    key: "{{PORTAINER_API_KEY}}"
+    showStacks: true
+    showContainers: true

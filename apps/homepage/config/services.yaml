@@ -35,3 +35,6 @@
     - Mosquitto MQTT Broker:
         icon: mqtt
         href: http://orangepi5b.local:9002/
+    - Rabbit MQ:
+        icon: rabbitmq
+        href: http://orangepi5b.local:15672/

@@ -1,0 +1,28 @@
+[2025-11-01 11:37:00] info: 	z2m: Logging to console, file (filename: log.log)
+[2025-11-01 11:37:00] info: 	z2m: Starting Zigbee2MQTT version 2.1.1 (commit #1accb8b66b95b99658c50e4c0209edcb946a5fe2)
+[2025-11-01 11:37:00] info: 	z2m: Starting zigbee-herdsman (3.2.5)
+[2025-11-01 11:37:00] info: 	zh:adapter:discovery: Matched adapter: {"path":"/dev/ttyUSB0","manufacturer":"ITead","serialNumber":"2ce7b14df766ec11b1a42142ef680de7","pnpId":"usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_2ce7b14df766ec11b1a42142ef680de7-if00-port0","vendorId":"10c4","productId":"ea60"} => zstack: path=/dev/ttyUSB0, score=4
+[2025-11-01 11:37:00] info: 	zh:zstack:znp: Opening SerialPort with {"path":"/dev/ttyUSB0","baudRate":115200,"rtscts":false,"autoOpen":false}
+[2025-11-01 11:37:00] info: 	zh:zstack:znp: Serialport opened
+[2025-11-01 11:37:01] info: 	z2m: zigbee-herdsman started (resumed)
+[2025-11-01 11:37:01] info: 	z2m: Coordinator firmware version: '{"meta":{"maintrel":1,"majorrel":2,"minorrel":7,"product":1,"revision":20230507,"transportrev":2},"type":"zStack3x0"}'
+[2025-11-01 11:37:01] info: 	z2m: Temperature Office (0xa4c138d142fa6125): WSD500A - Tuya Temperature & humidity sensor (EndDevice)
+[2025-11-01 11:37:01] info: 	z2m: Temperature Livingroom (0xa4c138695f3b3476): WSD500A - Tuya Temperature & humidity sensor (EndDevice)
+[2025-11-01 11:37:01] info: 	z2m: Temperature Pantry (0xa4c138f845ec194a): WSD500A - Tuya Temperature & humidity sensor (EndDevice)
+[2025-11-01 11:37:01] info: 	z2m: Motion 1 (0x00124b00293268a9): SNZB-03 - SONOFF Motion sensor (EndDevice)
+[2025-11-01 11:37:01] info: 	z2m: Motion 2 (0x00124b0029328998): SNZB-03 - SONOFF Motion sensor (EndDevice)
+[2025-11-01 11:37:01] info: 	z2m: Plug 1 (0x282c02bfffecabb5): 3RSP02028BZ - Third Reality Zigbee / BLE smart plug with power (Router)
+[2025-11-01 11:37:01] info: 	z2m: Temperature chickens! (0xa4c1388989ae7797): WSD500A - Tuya Temperature & humidity sensor (EndDevice)
+[2025-11-01 11:37:01] info: 	z2m: Plug 4 (0x282c02bfffee2a4b): 3RSP02028BZ - Third Reality Zigbee / BLE smart plug with power (Router)
+[2025-11-01 11:37:01] info: 	z2m: Plug 2 (0x282c02bfffec9a39): 3RSP02028BZ - Third Reality Zigbee / BLE smart plug with power (Router)
+[2025-11-01 11:37:01] info: 	z2m: Plug 3 (0x282c02bfffecf0c6): 3RSP02028BZ - Third Reality Zigbee / BLE smart plug with power (Router)
+[2025-11-01 11:37:01] info: 	z2m: Temperature Green House (0xa4c138322c1c566d): WSD500A - Tuya Temperature & humidity sensor (EndDevice)
+[2025-11-01 11:37:01] info: 	z2m: Gate Contact Sensor (0x00158d008b6980d9): MCCGQ11LM - Aqara Door and window sensor (EndDevice)
+[2025-11-01 11:37:01] info: 	z2m: Currently 12 devices are joined.
+[2025-11-01 11:37:01] info: 	z2m: Connecting to MQTT server at mqtt://mosquitto:1883
+[2025-11-01 11:37:01] error: 	z2m: MQTT failed to connect, exiting... (getaddrinfo ENOTFOUND mosquitto)
+[2025-11-01 11:37:01] info: 	z2m: Stopping zigbee-herdsman...
+[2025-11-01 11:37:10] info: 	zh:controller: Wrote coordinator backup to '/app/data/coordinator_backup.json'
+[2025-11-01 11:37:10] info: 	zh:zstack:znp: closing
+[2025-11-01 11:37:10] info: 	zh:zstack:znp: Port closed
+[2025-11-01 11:37:10] info: 	z2m: Stopped zigbee-herdsman

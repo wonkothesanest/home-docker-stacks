@@ -1,1 +1,5 @@
 .env
+
+# Traefik
+infra/traefik/acme.json
+infra/traefik/traefik-data/

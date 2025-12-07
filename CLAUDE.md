@@ -10,9 +10,10 @@ This repository contains Docker Compose stacks for a multi-host home infrastruct
 
 ### Host Distribution
 
-**orangepi5b.local (Raspberry Pi)**
+**orangepi5b.local (Raspberry Pi - Always-On Infrastructure)**
 - Traefik (infra/traefik) - Reverse proxy and edge/gateway node for routing traffic
 - Portainer Server (infra/portainer) - Container management UI
+- Tailscale (infra/tailscale) - Subnet router for secure remote access to entire home LAN
 - Zigbee2MQTT + Mosquitto (iot/zigbee-stack) - IoT device communication
 
 **wonko.local (Local Workstation)**
@@ -22,13 +23,14 @@ This repository contains Docker Compose stacks for a multi-host home infrastruct
 - Neo4j + NeoDash (data/neo4j) - Graph database and visualization
 - Homepage (apps/homepage) - Dashboard with custom Docker build
 - MCP Server (infra/mcp) - Model Context Protocol server with ES integration
+- Tailscale (infra/tailscale) - Client node accepting routes from orangepi5b subnet router
 
 ### Stack Organization
 
 ```
 apps/         - Application services (n8n, prefect, homepage)
 data/         - Data infrastructure (elasticsearch, neo4j)
-infra/        - Infrastructure services (traefik, portainer, mcp)
+infra/        - Infrastructure services (traefik, portainer, tailscale, mcp)
 iot/          - IoT services (zigbee, mosquitto)
 ```
 
@@ -109,6 +111,18 @@ Traefik on orangepi5b.local acts as the edge/gateway node using a hybrid archite
 The MCP server stack (infra/mcp) connects to multiple networks:
 - `mcp-network` - Internal MCP communication
 - `elasticsearch-network` - Shared with ES/Kibana for data access
+
+**Tailscale Remote Access:**
+Tailscale provides secure remote access using subnet routing:
+- **orangepi5b.local**: Acts as subnet router, advertising home LAN (192.168.1.0/24)
+- **wonko.local**: Client node accepting routes from orangepi5b
+- **Architecture**: orangepi5b is always-on and routes traffic to entire home network
+- **Deployment**: Use host-specific docker-compose files:
+  - `docker-compose.orangepi5b.yml` on orangepi5b
+  - `docker-compose.wonko.yml` on wonko
+- **Configuration**: Each host requires unique auth key in `.env` file
+- **Access**: All services accessible via LAN IPs through subnet router
+- See `docs/tailscale-access.md` for remote access guide
 
 ### Custom Builds
 

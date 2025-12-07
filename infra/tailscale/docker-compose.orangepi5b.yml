@@ -1,0 +1,27 @@
+services:
+  tailscale:
+    image: tailscale/tailscale:stable
+    container_name: tailscale
+    hostname: orangepi5b
+    restart: unless-stopped
+
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_HOSTNAME=orangepi5b
+      - TS_ROUTES=${LAN_SUBNET}
+      - TS_USERSPACE=false
+      - TS_EXTRA_ARGS=--advertise-exit-node --ssh
+
+    volumes:
+      - ./state:/var/lib/tailscale
+
+    devices:
+      - /dev/net/tun:/dev/net/tun:rw
+
+    cap_add:
+      - NET_ADMIN
+
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv6.conf.all.forwarding=1

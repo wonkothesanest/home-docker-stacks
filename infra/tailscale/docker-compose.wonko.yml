@@ -1,0 +1,22 @@
+services:
+  tailscale:
+    image: tailscale/tailscale:stable
+    container_name: tailscale
+    hostname: wonko
+    restart: unless-stopped
+
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_HOSTNAME=wonko
+      - TS_USERSPACE=false
+      - TS_EXTRA_ARGS=--accept-routes --ssh
+
+    volumes:
+      - ./state:/var/lib/tailscale
+
+    devices:
+      - /dev/net/tun:/dev/net/tun:rw
+
+    cap_add:
+      - NET_ADMIN

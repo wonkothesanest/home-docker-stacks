@@ -53,6 +53,12 @@ http:
     #   entryPoints:
     #     - "web"
     #   service: "homepage"
+    # Homepage - Dashboard (commented out, uncomment to enable)
+    zigbee2mqtt:
+      rule: "Host(`zigbee2mqtt.orangepi5b.local`)"
+      entryPoints:
+        - "web"
+      service: "zigbee2mqtt"
 
     # MCP Server - Model Context Protocol (commented out, uncomment to enable)
     # mcp:

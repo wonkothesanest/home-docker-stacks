@@ -182,6 +182,33 @@ sudo systemctl disable systemd-resolved
 2. Verify domain in `.env` matches Traefik `DOMAIN`
 3. Direct access: `http://<orangepi5b-ip>:8082/admin`
 
+### Verify homelab.local DNS Configuration
+Check if the custom DNS entries were loaded:
+
+```bash
+# 1. Check if config file was created by startup script
+docker exec pihole cat /etc/dnsmasq.d/02-homelab-local.conf
+# Should show: address=/homelab.local/10.0.0.192
+
+# 2. Check startup logs for custom script output
+docker compose logs pihole | grep "Custom Startup"
+# Should show messages about creating DNS config
+
+# 3. Test DNS resolution inside container
+docker exec pihole nslookup traefik.homelab.local localhost
+# Should return 10.0.0.192
+
+# 4. Test from host
+dig @10.0.0.192 traefik.homelab.local
+# Should return 10.0.0.192
+
+# 5. Verify startup script is mounted and executable
+docker exec pihole ls -la /custom-startup.sh
+docker exec pihole test -x /custom-startup.sh && echo "Executable" || echo "Not executable"
+```
+
+If the config file doesn't exist, the custom entrypoint script may not have executed. Check that you deployed from the file system (not Portainer git) and that `pihole-startup.sh` is in the stack directory.
+
 ## Integration with Traefik
 
 Pi-hole automatically registers with Traefik using Docker labels:

@@ -16,6 +16,10 @@ services:
       # Web interface port configuration (using FTL config format)
       FTLCONF_webserver_port: 8082
 
+      # Enable loading of custom dnsmasq configs from /etc/dnsmasq.d/
+      # This is required for the homelab.local wildcard DNS to work
+      FTLCONF_misc_etc_dnsmasq_d: true
+
       # Web interface password
       WEBPASSWORD: ${WEBPASSWORD}
 

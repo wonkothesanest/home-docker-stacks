@@ -6,10 +6,11 @@
 - search:
     provider: duckduckgo
     target: _blank
-- portainer:
-    type: portainer
-    url: "http://orangepi5b.local:9443"
-    env: 3 #Future add in 6 here for wonko.local:9000
-    key: "{{PORTAINER_API_KEY}}"
-    showStacks: true
-    showContainers: true
+      # In order to use portainer widget or docker you would have to add in a 
+      # label as show in here https://gethomepage.dev/configs/docker/#automatic-service-discovery
+      # I don't really like that syntax
+      #- portainer:
+      #   type: portainer
+      #   url: https://orangepi5b.local:9443
+      #   env: 3
+      #   key: {{HOMEPAGE_VAR_PORTAINER_API_KEY}}

@@ -11,11 +11,15 @@ services:
 
       # Docker Provider (for local orangepi5b containers)
       - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=true"
+      - "--providers.docker.exposedbydefault=false"
 
       # File Provider (for wonko.local services)
       - "--providers.file.directory=/etc/traefik/config"
       - "--providers.file.watch=true"
+
+      # Every container becomes <container-name>.<your-domain>
+      - "--providers.docker.defaultrule=Host(`{{ .Name }}.${DOMAIN}`)"
+
 
       # API/Dashboard
       - "--api.dashboard=true"

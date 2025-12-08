@@ -1,4 +1,5 @@
-services:  
+name: prefect_data_getters
+services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.15.3
     container_name: elasticsearch
@@ -28,10 +29,28 @@ services:
         - elasticsearch
       networks:
         - elasticsearch-network
-volumes:
-  es_data:
-    name: prefect_data_getters_es_data
+  mcp-server:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - MCP_SERVER_HOST=0.0.0.0
+      - MCP_SERVER_PORT=8000
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - PYTHONUNBUFFERED=1
+    volumes:
+      # Mount source for development - changes to Python files will be reflected immediately
+      - ../src/prefect_data_getters:/app/src/prefect_data_getters
+      - ../src/rag_mcp:/app/src/rag_mcp
+      # Optional: mount mappings if you need to modify them
+      - ../mappings:/app/mappings
+    restart: unless-stopped
+    networks:
+      - mcp-network
+      - elasticsearch-network
 
 networks:
-  elasticsearch-network:
+  mcp-network:
     driver: bridge

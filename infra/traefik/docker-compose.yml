@@ -1,0 +1,49 @@
+services:
+  traefik:
+    image: traefik:v3.6
+    container_name: traefik
+    restart: unless-stopped
+
+    command:
+      # Entry Points
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+
+      # Docker Provider (for local orangepi5b containers)
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=true"
+
+      # File Provider (for wonko.local services)
+      - "--providers.file.directory=/etc/traefik/config"
+      - "--providers.file.watch=true"
+
+      # API/Dashboard
+      - "--api.dashboard=true"
+      - "--api.insecure=true"  # Only for dev; use auth middleware for production
+
+      # Logging
+      - "--log.level=INFO"
+      - "--accesslog=true"
+
+    ports:
+      - "80:80"       # HTTP entry point
+      - "443:443"     # HTTPS entry point
+      - "9080:8080"   # Dashboard (9080 on host to avoid conflict, 8080 internal)
+
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"  # Docker API access for local containers
+      - "./config:/etc/traefik/config:ro"                # File provider config directory
+
+    # networks:
+    #   - traefik-network
+
+    labels:
+      # Enable Traefik for its own dashboard
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.${DOMAIN}`)"
+      - "traefik.http.routers.dashboard.entrypoints=web"
+      - "traefik.http.routers.dashboard.service=api@internal"
+
+# networks:
+#   traefik-network:
+#     external: true

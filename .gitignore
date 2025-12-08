@@ -1,1 +1,9 @@
 .env
+
+# Traefik
+infra/traefik/acme.json
+infra/traefik/traefik-data/
+
+# Tailscale
+infra/tailscale/.env
+infra/tailscale/state/

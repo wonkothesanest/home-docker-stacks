@@ -1,0 +1,131 @@
+# Traefik Dynamic Configuration - File Provider
+# This file defines manual routes to services running on wonko.local
+# Traefik will hot-reload this file when changes are detected (watch=true)
+
+http:
+  # Routers define how to match incoming requests
+  routers:
+    # Kibana - Data visualization and exploration tool
+    kibana:
+      rule: "Host(`kibana.homelab.local`)"
+      entryPoints:
+        - "web"
+      service: "kibana"
+
+    # Elasticsearch - Search and analytics engine
+    elasticsearch:
+      rule: "Host(`es.homelab.local`) || Host(`elasticsearch.homelab.local`)"
+      entryPoints:
+        - "web"
+      service: "elasticsearch"
+
+    # n8n - Workflow automation (commented out, uncomment to enable)
+    # n8n:
+    #   rule: "Host(`n8n.homelab.local`)"
+    #   entryPoints:
+    #     - "web"
+    #   service: "n8n"
+
+    # Prefect - Workflow orchestration (commented out, uncomment to enable)
+    # prefect:
+    #   rule: "Host(`prefect.homelab.local`)"
+    #   entryPoints:
+    #     - "web"
+    #   service: "prefect"
+
+    # Neo4j - Graph database (commented out, uncomment to enable)
+    # neo4j:
+    #   rule: "Host(`neo4j.homelab.local`)"
+    #   entryPoints:
+    #     - "web"
+    #   service: "neo4j"
+
+    # NeoDash - Neo4j visualization dashboard (commented out, uncomment to enable)
+    # neodash:
+    #   rule: "Host(`neodash.homelab.local`)"
+    #   entryPoints:
+    #     - "web"
+    #   service: "neodash"
+
+    # Homepage - Dashboard (commented out, uncomment to enable)
+    # homepage:
+    #   rule: "Host(`homepage.homelab.local`)"
+    #   entryPoints:
+    #     - "web"
+    #   service: "homepage"
+    # Pi-hole - Network-wide ad blocking (runs on orangepi5b with host networking)
+    pihole:
+      rule: "Host(`pihole.homelab.local`)"
+      entryPoints:
+        - "web"
+      service: "pihole"
+
+    # Zigbee2MQTT - IoT device communication
+    zigbee2mqtt:
+      rule: "Host(`zigbee2mqtt.orangepi5b.local`)"
+      entryPoints:
+        - "web"
+      service: "zigbee2mqtt"
+
+    # MCP Server - Model Context Protocol (commented out, uncomment to enable)
+    # mcp:
+    #   rule: "Host(`mcp.homelab.local`)"
+    #   entryPoints:
+    #     - "web"
+    #   service: "mcp"
+
+  # Services define backend servers
+  services:
+    # Kibana service pointing to wonko.local:5601
+    kibana:
+      loadBalancer:
+        servers:
+          - url: "http://wonko.local:5601"
+
+    # Elasticsearch service pointing to wonko.local:9200
+    elasticsearch:
+      loadBalancer:
+        servers:
+          - url: "http://wonko.local:9200"
+
+    # n8n service pointing to wonko.local:5678 (commented out)
+    # n8n:
+    #   loadBalancer:
+    #     servers:
+    #       - url: "http://wonko.local:5678"
+
+    # Prefect service pointing to wonko.local:4200 (commented out)
+    # prefect:
+    #   loadBalancer:
+    #     servers:
+    #       - url: "http://wonko.local:4200"
+
+    # Neo4j service pointing to wonko.local:7475 (commented out)
+    # neo4j:
+    #   loadBalancer:
+    #     servers:
+    #       - url: "http://wonko.local:7475"
+
+    # NeoDash service pointing to wonko.local:5005 (commented out)
+    # neodash:
+    #   loadBalancer:
+    #     servers:
+    #       - url: "http://wonko.local:5005"
+
+    # Homepage service - port depends on env var (commented out)
+    # homepage:
+    #   loadBalancer:
+    #     servers:
+    #       - url: "http://wonko.local:3000"  # Adjust port as needed
+
+    # MCP Server pointing to wonko.local:8000 (commented out)
+    # mcp:
+    #   loadBalancer:
+    #     servers:
+    #       - url: "http://wonko.local:8000"
+
+    # Pi-hole service pointing to localhost:8082 (runs on orangepi5b with host networking)
+    pihole:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:8082"

@@ -59,6 +59,12 @@ The Pi-hole stack uses a custom entrypoint script (`pihole-startup.sh`) that nee
    docker compose logs -f
    ```
 
+5. **Set the admin password** (if WEBPASSWORD in .env doesn't work):
+   ```bash
+   docker exec -it pihole pihole setpassword
+   ```
+   Enter your desired password when prompted. This sets the web interface login password.
+
 ## Access
 
 - **Web Interface**:
@@ -125,10 +131,16 @@ docker compose up -d
 docker compose exec pihole pihole updateGravity
 ```
 
-### Reset Password
+### Set/Reset Password
 ```bash
+# Recommended method (prompts for password)
+docker exec -it pihole pihole setpassword
+
+# Alternative method (also prompts for password)
 docker compose exec pihole pihole -a -p
 ```
+
+**Note**: The `WEBPASSWORD` environment variable in `.env` may not always work reliably. If you cannot log in to the web interface, use the `setpassword` command above to manually set the password.
 
 ## Backup & Restore
 

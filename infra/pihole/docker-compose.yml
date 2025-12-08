@@ -9,9 +9,6 @@ services:
     # Use host networking so Pi-hole binds directly to host interfaces
     network_mode: host
 
-    # Use custom startup script to inject DNS config
-    entrypoint: ["/custom-startup.sh"]
-
     environment:
       # Timezone
       TZ: ${TZ:-America/Los_Angeles}
@@ -38,7 +35,6 @@ services:
     volumes:
       - ./pihole:/etc/pihole
       - ./dnsmasq.d:/etc/dnsmasq.d
-      - ./pihole-startup.sh:/custom-startup.sh:ro
 
     cap_add:
       - NET_ADMIN  # Required for DHCP server features (optional)

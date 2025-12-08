@@ -9,11 +9,8 @@ services:
     # Use host networking so Pi-hole binds directly to host interfaces
     network_mode: host
 
-    # Create custom DNS config at startup
-    command: >
-      sh -c 'mkdir -p /etc/dnsmasq.d &&
-      echo "address=/homelab.local/${SERVER_IP:-10.0.0.192}" > /etc/dnsmasq.d/02-homelab-local.conf &&
-      /s6-init'
+    # Use custom startup script to inject DNS config
+    entrypoint: ["/custom-startup.sh"]
 
     environment:
       # Timezone
@@ -41,6 +38,7 @@ services:
     volumes:
       - ./pihole:/etc/pihole
       - ./dnsmasq.d:/etc/dnsmasq.d
+      - ./pihole-startup.sh:/custom-startup.sh:ro
 
     cap_add:
       - NET_ADMIN  # Required for DHCP server features (optional)

@@ -1,6 +1,9 @@
 # Environment file with secrets
 .env
 
-# Pi-hole data directories
+# Pi-hole runtime data directory
 pihole/
-dnsmasq.d/
+
+# dnsmasq.d - ignore auto-generated files, but track custom configs
+dnsmasq.d/*
+!dnsmasq.d/02-homelab-local.conf

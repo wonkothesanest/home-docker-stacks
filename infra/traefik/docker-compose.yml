@@ -34,8 +34,8 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"  # Docker API access for local containers
       - "./config:/etc/traefik/config:ro"                # File provider config directory
 
-    networks:
-      - traefik-network
+    # networks:
+    #   - traefik-network
 
     labels:
       # Enable Traefik for its own dashboard
@@ -44,6 +44,6 @@ services:
       - "traefik.http.routers.dashboard.entrypoints=web"
       - "traefik.http.routers.dashboard.service=api@internal"
 
-networks:
-  traefik-network:
-    external: true
+# networks:
+#   traefik-network:
+#     external: true

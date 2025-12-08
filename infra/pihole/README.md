@@ -13,6 +13,18 @@ Pi-hole acts as a DNS sinkhole, blocking ads and trackers at the DNS level for a
 - **Custom blocklists**: Add your own domains to block or whitelist
 - **Query logging**: Monitor DNS queries and blocked requests
 - **Traefik integration**: Access web UI via `pihole.homelab.local`
+- **Custom DNS configuration**: Resolves all `*.homelab.local` domains to Traefik
+
+## Important: Deployment Method
+
+**⚠️ Pi-hole must be deployed from the file system, NOT via Portainer's git deployment feature.**
+
+The Pi-hole stack uses a custom entrypoint script (`pihole-startup.sh`) that needs to be mounted from the local filesystem. While the script is tracked in git for version control, Portainer's git deployment has limitations with mounting executable scripts.
+
+**Recommended Deployment:**
+1. Clone/pull the repository to your orangepi5b file system
+2. Deploy using `docker compose up -d` directly, OR
+3. Use Portainer's "Add Stack" → "Upload" feature to deploy from the local file system
 
 ## Prerequisites
 

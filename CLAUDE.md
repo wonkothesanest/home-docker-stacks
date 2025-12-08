@@ -14,7 +14,7 @@ This repository contains Docker Compose stacks for a multi-host home infrastruct
 - Traefik (infra/traefik) - Reverse proxy and edge/gateway node for routing traffic
 - Portainer Server (infra/portainer) - Container management UI
 - Tailscale (infra/tailscale) - Subnet router for secure remote access to entire home LAN
-- Pi-hole (infra/pihole) - Network-wide ad blocking and DNS management
+- Pi-hole (infra/pihole) - Network-wide ad blocking and DNS management (deploy from file system, not Portainer git)
 - Zigbee2MQTT + Mosquitto (iot/zigbee-stack) - IoT device communication
 
 **wonko.local (Local Workstation)**
@@ -168,6 +168,15 @@ When modifying stacks:
 2. Update `.env.example` if new environment variables are added
 3. Document any new volume mounts or network requirements
 4. For multi-host deployments, verify host-specific configurations
+
+### Deployment Considerations
+
+**Pi-hole (infra/pihole) - File System Deployment Required:**
+Pi-hole uses a custom entrypoint script and must be deployed from the local file system, NOT via Portainer's git repository feature. Deploy using:
+- `docker compose up -d` directly from the cloned repository, OR
+- Portainer's "Add Stack" → "Upload" feature with the local file path
+
+The custom entrypoint script (`pihole-startup.sh`) creates DNS configuration at container startup to resolve all `*.homelab.local` domains to the Traefik instance. Portainer's git deployment has limitations with mounting and executing custom scripts.
 
 When adding new stacks:
 1. Create directory under appropriate category (apps/data/infra/iot)

@@ -9,6 +9,12 @@ services:
     # Use host networking so Pi-hole binds directly to host interfaces
     network_mode: host
 
+    # Create custom DNS config at startup
+    command: >
+      sh -c 'mkdir -p /etc/dnsmasq.d &&
+      echo "address=/homelab.local/${SERVER_IP:-10.0.0.192}" > /etc/dnsmasq.d/02-homelab-local.conf &&
+      /s6-init'
+
     environment:
       # Timezone
       TZ: ${TZ:-America/Los_Angeles}
@@ -29,12 +35,8 @@ services:
       DNSMASQ_LISTENING: all
 
       # Optional: Server IP for web interface
+      # Also used in startup command to configure *.homelab.local DNS resolution
       ServerIP: ${SERVER_IP}
-
-      # Custom DNS configuration for homelab.local domain
-      # All *.homelab.local queries resolve to orangepi5b (Traefik)
-      # Format: DNSMASQ_OPTS=--address=/domain/ip
-      DNSMASQ_OPTS: --address=/homelab.local/${SERVER_IP}
 
     volumes:
       - ./pihole:/etc/pihole

@@ -16,10 +16,13 @@ services:
     group_add:
       - dialout
     labels:
-      # Enable Traefik for its own dashboard
+      # Enable Traefik for Zigbee2MQTT
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`zigbee2mqtt.homelab.local`)"
-      - "traefik.http.routers.dashboard.entrypoints=web"
+      - "traefik.http.routers.zigbee2mqtt.rule=Host(`zigbee2mqtt.homelab.local`)"
+      - "traefik.http.routers.zigbee2mqtt.entrypoints=web"
+    networks:
+      - default
+      - traefik-network
 
   mosquitto:
     image: eclipse-mosquitto
@@ -35,3 +38,7 @@ services:
     group_add:
       - dialout
     user: 1001:1001
+
+networks:
+  traefik-network:
+    external: true

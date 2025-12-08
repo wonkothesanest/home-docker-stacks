@@ -10,10 +10,11 @@ services:
     network_mode: host
 
     environment:
-      # Web interface port (since we're using host networking)
-      WEB_PORT: 8082
       # Timezone
       TZ: ${TZ:-America/Los_Angeles}
+
+      # Web interface port configuration (using FTL config format)
+      FTLCONF_webserver_port: 8082
 
       # Web interface password
       WEBPASSWORD: ${WEBPASSWORD}

@@ -15,3 +15,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    labels:
+      # Enable Traefik for Zigbee2MQTT
+      - "traefik.enable=true"
+      - "traefik.http.routers.homepage.entrypoints=web"
+    networks:
+      - default
+      - traefik-network
+
+
+networks:
+  traefik-network:
+    external: true

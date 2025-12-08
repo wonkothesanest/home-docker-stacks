@@ -31,6 +31,11 @@ services:
       # Optional: Server IP for web interface
       ServerIP: ${SERVER_IP}
 
+      # Custom DNS configuration for homelab.local domain
+      # All *.homelab.local queries resolve to orangepi5b (Traefik)
+      # Format: DNSMASQ_OPTS=--address=/domain/ip
+      DNSMASQ_OPTS: --address=/homelab.local/${SERVER_IP}
+
     volumes:
       - ./pihole:/etc/pihole
       - ./dnsmasq.d:/etc/dnsmasq.d

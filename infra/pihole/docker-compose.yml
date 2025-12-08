@@ -1,0 +1,55 @@
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    restart: unless-stopped
+
+    hostname: pihole
+
+    ports:
+      - "53:53/tcp"      # DNS TCP
+      - "53:53/udp"      # DNS UDP
+      - "8082:80/tcp"    # Web interface (8082 on host to avoid conflicts)
+
+    environment:
+      # Timezone
+      TZ: ${TZ:-America/Los_Angeles}
+
+      # Web interface password
+      WEBPASSWORD: ${WEBPASSWORD}
+
+      # DNS settings
+      PIHOLE_DNS_: ${UPSTREAM_DNS:-1.1.1.1;1.0.0.1}  # Cloudflare by default
+
+      # Web interface settings
+      VIRTUAL_HOST: pihole.${DOMAIN:-homelab.local}
+
+      # Performance
+      DNSMASQ_LISTENING: all
+
+      # Optional: Server IP for web interface
+      ServerIP: ${SERVER_IP}
+
+    volumes:
+      - ./pihole:/etc/pihole
+      - ./dnsmasq.d:/etc/dnsmasq.d
+
+    cap_add:
+      - NET_ADMIN  # Required for DHCP server features (optional)
+
+    dns:
+      - 127.0.0.1      # Use itself for DNS after initial setup
+      - 1.1.1.1        # Fallback DNS
+
+    labels:
+      # Enable Traefik routing
+      - "traefik.enable=true"
+
+      # HTTP router
+      - "traefik.http.routers.pihole.rule=Host(`pihole.${DOMAIN:-homelab.local}`)"
+      - "traefik.http.routers.pihole.entrypoints=web"
+      - "traefik.http.services.pihole.loadbalancer.server.port=80"
+
+      # Optional: Add admin path routing
+      - "traefik.http.routers.pihole-admin.rule=Host(`pihole.${DOMAIN:-homelab.local}`) && PathPrefix(`/admin`)"
+      - "traefik.http.routers.pihole-admin.entrypoints=web"

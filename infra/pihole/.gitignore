@@ -1,0 +1,6 @@
+# Environment file with secrets
+.env
+
+# Pi-hole data directories
+pihole/
+dnsmasq.d/

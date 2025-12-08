@@ -14,6 +14,7 @@ This repository contains Docker Compose stacks for a multi-host home infrastruct
 - Traefik (infra/traefik) - Reverse proxy and edge/gateway node for routing traffic
 - Portainer Server (infra/portainer) - Container management UI
 - Tailscale (infra/tailscale) - Subnet router for secure remote access to entire home LAN
+- Pi-hole (infra/pihole) - Network-wide ad blocking and DNS management
 - Zigbee2MQTT + Mosquitto (iot/zigbee-stack) - IoT device communication
 
 **wonko.local (Local Workstation)**
@@ -30,7 +31,7 @@ This repository contains Docker Compose stacks for a multi-host home infrastruct
 ```
 apps/         - Application services (n8n, prefect, homepage)
 data/         - Data infrastructure (elasticsearch, neo4j)
-infra/        - Infrastructure services (traefik, portainer, tailscale, mcp)
+infra/        - Infrastructure services (traefik, portainer, tailscale, pihole, mcp)
 iot/          - IoT services (zigbee, mosquitto)
 ```
 
@@ -134,11 +135,21 @@ The Zigbee stack (iot/zigbee-stack) requires:
 - Device mapping via `DONGLE` env var (e.g., `/dev/ttyACM0`)
 - `dialout` group membership for serial port access
 
+### DNS Configuration
+
+Pi-hole (infra/pihole) provides network-wide DNS and ad blocking:
+- Requires port 53 (DNS) available on host
+- If systemd-resolved is running, it must be stopped/disabled
+- Configure devices to use orangepi5b IP as DNS server
+- Web interface accessible via `pihole.homelab.local/admin` (Traefik) or direct port 8082
+- See stack README for setup and troubleshooting
+
 ### Port Mappings
 
 Key service ports:
 - Traefik: 80 (HTTP), 443 (HTTPS), 9080 (dashboard)
 - Portainer: 9443 (HTTPS), 8000 (tunnel)
+- Pi-hole: 53 (DNS TCP/UDP), 8082 (web interface)
 - n8n: 5678
 - Prefect: 4200 (UI), 8080 (API)
 - Elasticsearch: 9200

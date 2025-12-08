@@ -6,12 +6,12 @@ services:
 
     hostname: pihole
 
-    ports:
-      - "53:53/tcp"      # DNS TCP
-      - "53:53/udp"      # DNS UDP
-      - "8082:80/tcp"    # Web interface (8082 on host to avoid conflicts)
+    # Use host networking so Pi-hole binds directly to host interfaces
+    network_mode: host
 
     environment:
+      # Web interface port (since we're using host networking)
+      WEB_PORT: 8082
       # Timezone
       TZ: ${TZ:-America/Los_Angeles}
 
@@ -41,15 +41,6 @@ services:
       - 127.0.0.1      # Use itself for DNS after initial setup
       - 1.1.1.1        # Fallback DNS
 
-    labels:
-      # Enable Traefik routing
-      - "traefik.enable=true"
-
-      # HTTP router
-      - "traefik.http.routers.pihole.rule=Host(`pihole.${DOMAIN:-homelab.local}`)"
-      - "traefik.http.routers.pihole.entrypoints=web"
-      - "traefik.http.services.pihole.loadbalancer.server.port=80"
-
-      # Optional: Add admin path routing
-      - "traefik.http.routers.pihole-admin.rule=Host(`pihole.${DOMAIN:-homelab.local}`) && PathPrefix(`/admin`)"
-      - "traefik.http.routers.pihole-admin.entrypoints=web"
+    # Note: Traefik auto-discovery doesn't work with host networking
+    # Access Pi-hole directly at http://10.0.0.192:8082/admin
+    # For Traefik routing, add a file provider configuration in Traefik

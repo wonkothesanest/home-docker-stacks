@@ -10,7 +10,11 @@ services:
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_HOSTNAME=wonko
       - TS_USERSPACE=false
-      - TS_EXTRA_ARGS=--accept-routes --ssh
+      - TS_EXTRA_ARGS=--accept-routes --accept-dns --ssh
+
+    dns:
+      - 100.100.100.100
+      - 8.8.8.8
 
     volumes:
       - ./state:/var/lib/tailscale

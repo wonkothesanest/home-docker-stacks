@@ -1,17 +1,10 @@
 - Server:
-    - Prefect:
-        description: Prefect Server
-        icon: apache-airflow
-        href: http://wonko.local:4200/dashboard
     - Elasticsearch:
         icon: elasticsearch
         href: http://wonko.local:9200
     - Kibana:
         icon: kibana
         href: http://wonko.local:5601
-    - n8n:
-        icon: n8n
-        href: http://wonko.local:5678/home/workflows
     - Neo4j Browser:
         icon: neo4j
         href: http://wonko.local:7474
@@ -21,6 +14,20 @@
     - Neodash:
         icon: neo4j
         href: http://wonko.local:5005
+
+- Workflows:
+    - Prefect:
+        description: Prefect Server
+        icon: apache-airflow
+        href: http://wonko.local:4200/dashboard
+    - N8N:
+        icon: n8n
+        href: http://wonko.local:5678/
+
+- LLMs:
+    - LibreChat:
+        icon: librechat
+        href: http://wonko.local:3080/
 
 - OrangePi5B:
     - OpenHAB:
@@ -38,3 +45,14 @@
     - Rabbit MQ:
         icon: rabbitmq
         href: http://orangepi5b.local:15672/
+
+- Networking:
+    - Pi-hole:
+        icon: pi-hole
+        href: http://orangepi5b.local:8082
+    - Tailscale:
+        icon: tailscale
+        href: https://login.tailscale.com/admin/machines
+    - Traefik:
+        icon: traefik
+        href: http://orangepi5b.local:9080/

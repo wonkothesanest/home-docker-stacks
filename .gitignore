@@ -7,3 +7,6 @@ infra/traefik/traefik-data/
 # Tailscale
 infra/tailscale/.env
 infra/tailscale/state/
+
+# Zigbee2MQTT
+iot/zigbee-stack/zigbee2mqtt-data/log

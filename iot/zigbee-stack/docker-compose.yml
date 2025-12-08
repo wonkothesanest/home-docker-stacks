@@ -15,6 +15,11 @@ services:
       - ${DONGLE}:/dev/ttyUSB0:rw
     group_add:
       - dialout
+    labels:
+      # Enable Traefik for its own dashboard
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.${DOMAIN}`)"
+      - "traefik.http.routers.dashboard.entrypoints=web"
 
   mosquitto:
     image: eclipse-mosquitto

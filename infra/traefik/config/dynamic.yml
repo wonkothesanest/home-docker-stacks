@@ -60,13 +60,6 @@ http:
         - "web"
       service: "pihole"
 
-    # Zigbee2MQTT - IoT device communication
-    zigbee2mqtt:
-      rule: "Host(`zigbee2mqtt.orangepi5b.local`)"
-      entryPoints:
-        - "web"
-      service: "zigbee2mqtt"
-
     # MCP Server - Model Context Protocol (commented out, uncomment to enable)
     # mcp:
     #   rule: "Host(`mcp.homelab.local`)"

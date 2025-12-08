@@ -18,7 +18,7 @@ services:
     labels:
       # Enable Traefik for its own dashboard
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.${DOMAIN}`)"
+      - "traefik.http.routers.dashboard.rule=Host(`zigbee2mqtt.homelab.local`)"
       - "traefik.http.routers.dashboard.entrypoints=web"
 
   mosquitto:

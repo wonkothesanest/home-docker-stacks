@@ -11,7 +11,7 @@ services:
 
       # Docker Provider (for local orangepi5b containers)
       - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.exposedbydefault=true"
       - "--providers.docker.network=traefik-network"
 
       # File Provider (for wonko.local services)

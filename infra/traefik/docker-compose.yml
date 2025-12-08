@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: traefik:v3.2
+    image: traefik:v3.6
     container_name: traefik
     restart: unless-stopped
 
@@ -12,7 +12,6 @@ services:
       # Docker Provider (for local orangepi5b containers)
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=true"
-      - "--providers.docker.network=traefik-network"
 
       # File Provider (for wonko.local services)
       - "--providers.file.directory=/etc/traefik/config"

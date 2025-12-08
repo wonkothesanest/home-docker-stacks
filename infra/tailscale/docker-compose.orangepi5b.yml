@@ -11,7 +11,11 @@ services:
       - TS_HOSTNAME=orangepi5b
       - TS_ROUTES=${LAN_SUBNET}
       - TS_USERSPACE=false
-      - TS_EXTRA_ARGS=--advertise-exit-node --ssh
+      - TS_EXTRA_ARGS=--advertise-exit-node --accept-dns --ssh
+
+    dns:
+      - 100.100.100.100
+      - 8.8.8.8
 
     volumes:
       - ./state:/var/lib/tailscale

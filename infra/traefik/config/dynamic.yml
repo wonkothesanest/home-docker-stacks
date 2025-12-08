@@ -53,7 +53,14 @@ http:
     #   entryPoints:
     #     - "web"
     #   service: "homepage"
-    # Homepage - Dashboard (commented out, uncomment to enable)
+    # Pi-hole - Network-wide ad blocking (runs on orangepi5b with host networking)
+    pihole:
+      rule: "Host(`pihole.homelab.local`)"
+      entryPoints:
+        - "web"
+      service: "pihole"
+
+    # Zigbee2MQTT - IoT device communication
     zigbee2mqtt:
       rule: "Host(`zigbee2mqtt.orangepi5b.local`)"
       entryPoints:
@@ -116,3 +123,9 @@ http:
     #   loadBalancer:
     #     servers:
     #       - url: "http://wonko.local:8000"
+
+    # Pi-hole service pointing to localhost:8082 (runs on orangepi5b with host networking)
+    pihole:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:8082"

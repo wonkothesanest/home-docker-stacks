@@ -15,9 +15,9 @@ services:
       - ./config/:/app/config/
     restart: unless-stopped
     labels:
-      # Enable Traefik for Zigbee2MQTT
       - "traefik.enable=true"
       - "traefik.http.routers.homepage.entrypoints=web"
+        #- "traefik.http.routers.homepage.rule=Host(`homepage.homelab.local`)"
     networks:
       - default
       - traefik-network

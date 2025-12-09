@@ -18,8 +18,8 @@ services:
       - "--providers.file.watch=true"
 
       # Every container becomes <container-name>.<your-domain>
-      - "--providers.docker.defaultrule=Host(`{{ .Name }}.${DOMAIN}`)"
-
+      - "--providers.docker.defaultrule=Host(`{{ index .Labels \"com.docker.compose.service\" }}.${DOMAIN}`)"
+      - "--providers.docker.network=traefik-network"
 
       # API/Dashboard
       - "--api.dashboard=true"
@@ -27,7 +27,12 @@ services:
 
       # Logging
       - "--log.level=INFO"
-      - "--accesslog=true"
+      - "--accesslog=true"                   # Enable access log
+      - "--accesslog.bufferingsize=0"        # Flush on every line (no buffering)
+      - "--accesslog.format=json"            # Easier to grep/jq
+      - "--accesslog.fields.defaultmode=keep"
+      - "--accesslog.fields.headers.defaultmode=keep"
+
 
     ports:
       - "80:80"       # HTTP entry point

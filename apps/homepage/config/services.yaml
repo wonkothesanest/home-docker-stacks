@@ -1,58 +1,58 @@
 - Server:
     - Elasticsearch:
         icon: elasticsearch
-        href: http://wonko.local:9200
+        href: http://elasticsearch.homelab.local
     - Kibana:
         icon: kibana
-        href: http://wonko.local:5601
+        href: http://kibana.homelab.local
     - Neo4j Browser:
         icon: neo4j
-        href: http://wonko.local:7474
+        href: http://neo4j.homelab.local
     - Neo4j Bolt:
         icon: neo4j
         href: http://wonko.local:7687
     - Neodash:
         icon: neo4j
-        href: http://wonko.local:5005
+        href: http://neodash.homelab.local
 
 - Workflows:
     - Prefect:
         description: Prefect Server
         icon: apache-airflow
-        href: http://wonko.local:4200/dashboard
+        href: http://prefect.homelab.local/dashboard
     - N8N:
         icon: n8n
-        href: http://wonko.local:5678/
+        href: http://n8n.homelab.local
 
 - LLMs:
     - LibreChat:
         icon: librechat
-        href: http://wonko.local:3080/
+        href: http://librechat.homelab.local
 
 - OrangePi5B:
     - OpenHAB:
         icon: openhab
-        href: http://orangepi5b.local:8080
+        href: http://openhab.homelab.local
     - Portainer:
         icon: portainer
-        href: https://orangepi5b.local:9443/
+        href: http://portainer.homelab.local
     - Zigbee2MQTT:
         icon: zigbee2mqtt
-        href: http://orangepi5b.local:8081/
+        href: http://zigbee2mqtt.homelab.local
     - Mosquitto MQTT Broker:
         icon: mqtt
-        href: http://orangepi5b.local:9002/
+        href: http://mosquitto.homelab.local
     - Rabbit MQ:
         icon: rabbitmq
-        href: http://orangepi5b.local:15672/
+        href: http://rabbitmq.homelab.local
 
 - Networking:
     - Pi-hole:
         icon: pi-hole
-        href: http://orangepi5b.local:8082
+        href: http://pihole.homelab.local
     - Tailscale:
         icon: tailscale
         href: https://login.tailscale.com/admin/machines
     - Traefik:
         icon: traefik
-        href: http://orangepi5b.local:9080/
+        href: http://traefik.homelab.local

@@ -67,6 +67,48 @@ http:
         - "web"
       service: "mcp"
 
+    # Portainer - Container management (HTTPS backend)
+    portainer:
+      rule: "Host(`portainer.homelab.local`)"
+      entryPoints:
+        - "web"
+      service: "portainer"
+
+    # Mosquitto - MQTT web interface
+    mosquitto:
+      rule: "Host(`mosquitto.homelab.local`)"
+      entryPoints:
+        - "web"
+      service: "mosquitto"
+
+    # RabbitMQ - Message broker management interface
+    rabbitmq:
+      rule: "Host(`rabbitmq.homelab.local`)"
+      entryPoints:
+        - "web"
+      service: "rabbitmq"
+
+    # OpenHAB - Home automation platform
+    openhab:
+      rule: "Host(`openhab.homelab.local`)"
+      entryPoints:
+        - "web"
+      service: "openhab"
+
+    # Traefik Dashboard - Proxy dashboard
+    traefik-dashboard:
+      rule: "Host(`traefik.homelab.local`)"
+      entryPoints:
+        - "web"
+      service: "traefik-dashboard"
+
+    # LibreChat - LLM Chat Interface
+    librechat:
+      rule: "Host(`librechat.homelab.local`)"
+      entryPoints:
+        - "web"
+      service: "librechat"
+
   # Services define backend servers
   services:
     # Kibana service pointing to wonko.local:5601
@@ -122,3 +164,45 @@ http:
       loadBalancer:
         servers:
           - url: "http://pi.hole:8082/admin"
+
+    # Portainer service pointing to orangepi5b:9443 (HTTPS)
+    portainer:
+      loadBalancer:
+        servers:
+          - url: "https://orangepi5b.local:9443"
+        serversTransport: insecureTransport
+
+    # Mosquitto web interface pointing to orangepi5b:9002
+    mosquitto:
+      loadBalancer:
+        servers:
+          - url: "http://orangepi5b.local:9002"
+
+    # RabbitMQ management interface pointing to orangepi5b:15672
+    rabbitmq:
+      loadBalancer:
+        servers:
+          - url: "http://orangepi5b.local:15672"
+
+    # OpenHAB pointing to orangepi5b:8080
+    openhab:
+      loadBalancer:
+        servers:
+          - url: "http://orangepi5b.local:8080"
+
+    # Traefik dashboard pointing to orangepi5b:9080
+    traefik-dashboard:
+      loadBalancer:
+        servers:
+          - url: "http://orangepi5b.local:9080"
+
+    # LibreChat pointing to wonko.local:3080
+    librechat:
+      loadBalancer:
+        servers:
+          - url: "http://wonko.local:3080"
+
+  # ServersTransport for HTTPS backends with self-signed certificates
+  serversTransports:
+    insecureTransport:
+      insecureSkipVerify: true

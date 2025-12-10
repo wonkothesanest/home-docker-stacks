@@ -129,31 +129,26 @@ http:
         servers:
           - url: "http://wonko.local:5678"
 
-  # Prefect service pointing to wonko.local:4200 (commented out)
+    # Prefect service pointing to wonko.local:4200
     prefect:
       loadBalancer:
         servers:
           - url: "http://wonko.local:4200"
 
-  # Neo4j service pointing to wonko.local:7475 (commented out)
+    # Neo4j service pointing to wonko.local:7475
     neo4j:
       loadBalancer:
         servers:
           - url: "http://wonko.local:7475"
 
-  # NeoDash service pointing to wonko.local:5005 (commented out)
+    # NeoDash service pointing to wonko.local:5005
     neodash:
       loadBalancer:
         servers:
           - url: "http://wonko.local:5005"
 
-  # Homepage service - port depends on env var (commented out)
-  # homepage:
-  #   loadBalancer:
-  #     servers:
-  #       - url: "http://wonko.local:3000"  # Adjust port as needed
 
-  # MCP Server pointing to wonko.local:8000 (commented out)
+    # MCP Server pointing to wonko.local:8000
     mcp:
       loadBalancer:
         servers:

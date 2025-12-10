@@ -115,13 +115,13 @@ http:
     kibana:
       loadBalancer:
         servers:
-          - url: "http://10.0.0.150:5601"
+          - url: "http://wonko.local:5601"
 
     # Elasticsearch service pointing to wonko.local:9200
     elasticsearch:
       loadBalancer:
         servers:
-          - url: "http://10.0.0.150:9200"
+          - url: "http://wonko.local:9200"
 
     # n8n service pointing to wonko.local:5678 (commented out)
     n8n:

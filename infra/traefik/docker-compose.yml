@@ -46,6 +46,13 @@ services:
     networks:
       - traefik-network
 
+    extra_hosts:
+      - "wonko.local:10.0.0.105"
+      - "wonko:10.0.0.105"
+      - "orangepi5b.local:10.0.0.192"
+      - "orangepi5b:10.0.0.192"
+      - "pi.hole:10.0.0.192"
+
     labels:
       # Enable Traefik for its own dashboard
       - "traefik.enable=true"

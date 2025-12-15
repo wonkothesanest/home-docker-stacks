@@ -48,5 +48,5 @@ services:
       - 1.1.1.1        # Fallback DNS
 
     # Note: Traefik auto-discovery doesn't work with host networking
-    # Access Pi-hole directly at http://10.0.0.192:8082/admin
+    # Access Pi-hole directly at http://192.168.50.40:8082/admin
     # For Traefik routing, add a file provider configuration in Traefik

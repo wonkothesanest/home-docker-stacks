@@ -88,8 +88,8 @@ This deployment creates a Tailscale mesh network with:
    TS_AUTHKEY=tskey-auth-xxxxx-xxxxxxxxxxxxxx
 
    # Your home LAN subnet (adjust if different)
-   # Common: 192.168.1.0/24, 192.168.0.0/24, 10.0.0.0/24
-   LAN_SUBNET=192.168.1.0/24
+   # Common: 192.168.1.0/24, 192.168.0.0/24, 192.168.50.0/24
+   LAN_SUBNET=192.168.50.0/24
    ```
 
    Save and exit (Ctrl+O, Enter, Ctrl+X in nano)

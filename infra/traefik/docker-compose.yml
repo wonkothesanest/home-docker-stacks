@@ -47,11 +47,11 @@ services:
       - traefik-network
 
     extra_hosts:
-      - "wonko.local:10.0.0.105"
-      - "wonko:10.0.0.105"
-      - "orangepi5b.local:10.0.0.192"
-      - "orangepi5b:10.0.0.192"
-      - "pi.hole:10.0.0.192"
+      - "wonko.local:192.168.50.41"
+      - "wonko:192.168.50.41"
+      - "orangepi5b.local:192.168.50.40"
+      - "orangepi5b:192.168.50.40"
+      - "pi.hole:192.168.50.40"
 
     labels:
       # Enable Traefik for its own dashboard

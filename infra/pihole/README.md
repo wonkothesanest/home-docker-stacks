@@ -188,7 +188,7 @@ Check if the custom DNS entries were loaded:
 ```bash
 # 1. Check if config file was created by startup script
 docker exec pihole cat /etc/dnsmasq.d/02-homelab-local.conf
-# Should show: address=/homelab.local/10.0.0.192
+# Should show: address=/homelab.local/192.168.50.40
 
 # 2. Check startup logs for custom script output
 docker compose logs pihole | grep "Custom Startup"
@@ -196,11 +196,11 @@ docker compose logs pihole | grep "Custom Startup"
 
 # 3. Test DNS resolution inside container
 docker exec pihole nslookup traefik.homelab.local localhost
-# Should return 10.0.0.192
+# Should return 192.168.50.40
 
 # 4. Test from host
-dig @10.0.0.192 traefik.homelab.local
-# Should return 10.0.0.192
+dig @192.168.50.40 traefik.homelab.local
+# Should return 192.168.50.40
 
 # 5. Verify startup script is mounted and executable
 docker exec pihole ls -la /custom-startup.sh

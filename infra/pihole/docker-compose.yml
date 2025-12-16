@@ -17,7 +17,7 @@ services:
       FTLCONF_webserver_port: 8082
 
       # Enable loading of custom dnsmasq configs from /etc/dnsmasq.d/
-      # This is required for the homelab.local wildcard DNS to work
+      # This is required for the home wildcard DNS to work
       FTLCONF_misc_etc_dnsmasq_d: true
 
       # Web interface password
@@ -27,13 +27,13 @@ services:
       PIHOLE_DNS_: ${UPSTREAM_DNS:-1.1.1.1;1.0.0.1}  # Cloudflare by default
 
       # Web interface settings
-      VIRTUAL_HOST: pihole.${DOMAIN:-homelab.local}
+      VIRTUAL_HOST: pihole.${DOMAIN:-home}
 
       # Performance
       DNSMASQ_LISTENING: all
 
       # Optional: Server IP for web interface
-      # Also used in startup command to configure *.homelab.local DNS resolution
+      # Also used in startup command to configure *.home DNS resolution
       ServerIP: ${SERVER_IP}
 
     volumes:

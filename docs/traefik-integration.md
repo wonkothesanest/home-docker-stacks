@@ -49,7 +49,7 @@ http:
   routers:
     # Add your router
     myservice:
-      rule: "Host(`myservice.homelab.local`)"
+      rule: "Host(`myservice.home`)"
       entryPoints:
         - "web"
       service: "myservice"
@@ -76,13 +76,13 @@ docker compose logs traefik | grep "Configuration loaded"
 Add DNS/hosts entry on your client machine:
 
 ```
-<orangepi5b-IP> myservice.homelab.local
+<orangepi5b-IP> myservice.home
 ```
 
 Test access:
 
 ```bash
-curl http://myservice.homelab.local
+curl http://myservice.home
 ```
 
 ### Examples of wonko.local Services
@@ -93,7 +93,7 @@ curl http://myservice.homelab.local
 http:
   routers:
     n8n:
-      rule: "Host(`n8n.homelab.local`)"
+      rule: "Host(`n8n.home`)"
       entryPoints:
         - "web"
       service: "n8n"
@@ -111,7 +111,7 @@ http:
 http:
   routers:
     prefect:
-      rule: "Host(`prefect.homelab.local`)"
+      rule: "Host(`prefect.home`)"
       entryPoints:
         - "web"
       service: "prefect"
@@ -129,7 +129,7 @@ http:
 http:
   routers:
     neo4j:
-      rule: "Host(`neo4j.homelab.local`)"
+      rule: "Host(`neo4j.home`)"
       entryPoints:
         - "web"
       service: "neo4j"
@@ -149,7 +149,7 @@ You can route multiple hostnames to the same service:
 http:
   routers:
     elasticsearch:
-      rule: "Host(`es.homelab.local`) || Host(`elasticsearch.homelab.local`)"
+      rule: "Host(`es.home`) || Host(`elasticsearch.home`)"
       entryPoints:
         - "web"
       service: "elasticsearch"
@@ -192,7 +192,7 @@ services:
     # Add Traefik labels
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.myservice.rule=Host(`myservice.homelab.local`)"
+      - "traefik.http.routers.myservice.rule=Host(`myservice.home`)"
       - "traefik.http.routers.myservice.entrypoints=web"
       - "traefik.http.services.myservice.loadbalancer.server.port=8080"
 
@@ -222,13 +222,13 @@ Visit http://orangepi5b.local:9080/dashboard/ and check:
 Add DNS/hosts entry:
 
 ```
-<orangepi5b-IP> myservice.homelab.local
+<orangepi5b-IP> myservice.home
 ```
 
 Test:
 
 ```bash
-curl http://myservice.homelab.local
+curl http://myservice.home
 ```
 
 ### Example: Adding Portainer
@@ -251,7 +251,7 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`portainer.homelab.local`)"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.home`)"
       - "traefik.http.routers.portainer.entrypoints=web"
       - "traefik.http.services.portainer.loadbalancer.server.port=9443"
       - "traefik.http.services.portainer.loadbalancer.server.scheme=https"
@@ -279,7 +279,7 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.webapp.rule=Host(`webapp.homelab.local`)"
+      - "traefik.http.routers.webapp.rule=Host(`webapp.home`)"
       - "traefik.http.routers.webapp.entrypoints=web"
       - "traefik.http.services.webapp.loadbalancer.server.port=3000"
       - "traefik.docker.network=traefik-network"  # IMPORTANT: Specify network
@@ -304,7 +304,7 @@ Route based on URL path instead of hostname:
 ```yaml
 labels:
   - "traefik.enable=true"
-  - "traefik.http.routers.api.rule=Host(`homelab.local`) && PathPrefix(`/api`)"
+  - "traefik.http.routers.api.rule=Host(`home`) && PathPrefix(`/api`)"
   - "traefik.http.routers.api.entrypoints=web"
   - "traefik.http.services.api.loadbalancer.server.port=8000"
 ```
@@ -316,7 +316,7 @@ If the backend app doesn't expect the path prefix:
 ```yaml
 labels:
   - "traefik.enable=true"
-  - "traefik.http.routers.api.rule=Host(`homelab.local`) && PathPrefix(`/api`)"
+  - "traefik.http.routers.api.rule=Host(`home`) && PathPrefix(`/api`)"
   - "traefik.http.routers.api.entrypoints=web"
   - "traefik.http.services.api.loadbalancer.server.port=8000"
   - "traefik.http.middlewares.api-stripprefix.stripprefix.prefixes=/api"
@@ -330,7 +330,7 @@ Traefik v3 handles WebSocket upgrades automatically. No special configuration ne
 ```yaml
 labels:
   - "traefik.enable=true"
-  - "traefik.http.routers.ws-app.rule=Host(`ws.homelab.local`)"
+  - "traefik.http.routers.ws-app.rule=Host(`ws.home`)"
   - "traefik.http.routers.ws-app.entrypoints=web"
   - "traefik.http.services.ws-app.loadbalancer.server.port=8080"
 ```

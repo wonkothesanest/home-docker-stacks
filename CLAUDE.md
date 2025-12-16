@@ -141,7 +141,7 @@ Pi-hole (infra/pihole) provides network-wide DNS and ad blocking:
 - Requires port 53 (DNS) available on host
 - If systemd-resolved is running, it must be stopped/disabled
 - Configure devices to use orangepi5b IP as DNS server
-- Web interface accessible via `pihole.homelab.local/admin` (Traefik) or direct port 8082
+- Web interface accessible via `pihole.home/admin` (Traefik) or direct port 8082
 - See stack README for setup and troubleshooting
 
 ### Port Mappings
@@ -176,7 +176,7 @@ Pi-hole uses a custom entrypoint script and must be deployed from the local file
 - `docker compose up -d` directly from the cloned repository, OR
 - Portainer's "Add Stack" → "Upload" feature with the local file path
 
-The custom entrypoint script (`pihole-startup.sh`) creates DNS configuration at container startup to resolve all `*.homelab.local` domains to the Traefik instance. Portainer's git deployment has limitations with mounting and executing custom scripts.
+The custom entrypoint script (`pihole-startup.sh`) creates DNS configuration at container startup to resolve all `*.home` domains to the Traefik instance. Portainer's git deployment has limitations with mounting and executing custom scripts.
 
 When adding new stacks:
 1. Create directory under appropriate category (apps/data/infra/iot)

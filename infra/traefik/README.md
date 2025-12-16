@@ -42,7 +42,7 @@ Internet/LAN → orangepi5b.local:80/443 (Traefik) → Routes to:
    - Compose path: `infra/traefik/docker-compose.yml`
 
 2. Set Environment Variables in Portainer UI:
-   - `DOMAIN=homelab.local`
+   - `DOMAIN=home`
    - `WONKO_HOST=wonko.local`
 
 3. Deploy stack
@@ -111,20 +111,20 @@ Dashboard should be accessible at: http://orangepi5b.local:9080/dashboard/
 Add entries to `/etc/hosts` on client machines (or configure DNS server):
 
 ```
-<orangepi5b-IP> traefik.homelab.local
-<orangepi5b-IP> kibana.homelab.local
-<orangepi5b-IP> es.homelab.local
-<orangepi5b-IP> elasticsearch.homelab.local
+<orangepi5b-IP> traefik.home
+<orangepi5b-IP> kibana.home
+<orangepi5b-IP> es.home
+<orangepi5b-IP> elasticsearch.home
 ```
 
 ### Test Access
 
 ```bash
 # Test Kibana
-curl http://kibana.homelab.local
+curl http://kibana.home
 
 # Test Elasticsearch
-curl http://es.homelab.local
+curl http://es.home
 ```
 
 ## Adding Services

@@ -12,8 +12,8 @@ Pi-hole acts as a DNS sinkhole, blocking ads and trackers at the DNS level for a
 - **Network-wide protection**: Works on all devices without client-side configuration
 - **Custom blocklists**: Add your own domains to block or whitelist
 - **Query logging**: Monitor DNS queries and blocked requests
-- **Traefik integration**: Access web UI via `pihole.homelab.local`
-- **Custom DNS configuration**: Resolves all `*.homelab.local` domains to Traefik
+- **Traefik integration**: Access web UI via `pihole.home`
+- **Custom DNS configuration**: Resolves all `*.home` domains to Traefik
 
 ## Important: Deployment Method
 
@@ -44,7 +44,7 @@ The Pi-hole stack uses a custom entrypoint script (`pihole-startup.sh`) that nee
    ```bash
    nano .env
    ```
-   - Set `DOMAIN` to match your Traefik domain (e.g., `homelab.local`)
+   - Set `DOMAIN` to match your Traefik domain (e.g., `home`)
    - Set `WEBPASSWORD` to a strong password
    - Set `SERVER_IP` to your orangepi5b IP address (e.g., `192.168.1.100`)
 
@@ -68,7 +68,7 @@ The Pi-hole stack uses a custom entrypoint script (`pihole-startup.sh`) that nee
 ## Access
 
 - **Web Interface**:
-  - Via Traefik: `http://pihole.homelab.local/admin`
+  - Via Traefik: `http://pihole.home/admin`
   - Direct access: `http://<orangepi5b-ip>:8082/admin`
 - **DNS Server**: Point your devices to the orangepi5b IP address (port 53)
 
@@ -103,7 +103,7 @@ UPSTREAM_DNS=9.9.9.9;149.112.112.112
 
 ### Custom Blocklists
 
-1. Access web interface at `http://pihole.homelab.local/admin`
+1. Access web interface at `http://pihole.home/admin`
 2. Navigate to **Group Management > Adlists**
 3. Add blocklist URLs (many community lists available)
 4. Update gravity: **Tools > Update Gravity**
@@ -182,24 +182,24 @@ sudo systemctl disable systemd-resolved
 2. Verify domain in `.env` matches Traefik `DOMAIN`
 3. Direct access: `http://<orangepi5b-ip>:8082/admin`
 
-### Verify homelab.local DNS Configuration
+### Verify home DNS Configuration
 Check if the custom DNS entries were loaded:
 
 ```bash
 # 1. Check if config file was created by startup script
 docker exec pihole cat /etc/dnsmasq.d/02-homelab-local.conf
-# Should show: address=/homelab.local/192.168.50.40
+# Should show: address=/home/192.168.50.40
 
 # 2. Check startup logs for custom script output
 docker compose logs pihole | grep "Custom Startup"
 # Should show messages about creating DNS config
 
 # 3. Test DNS resolution inside container
-docker exec pihole nslookup traefik.homelab.local localhost
+docker exec pihole nslookup traefik.home localhost
 # Should return 192.168.50.40
 
 # 4. Test from host
-dig @192.168.50.40 traefik.homelab.local
+dig @192.168.50.40 traefik.home
 # Should return 192.168.50.40
 
 # 5. Verify startup script is mounted and executable
@@ -212,7 +212,7 @@ If the config file doesn't exist, the custom entrypoint script may not have exec
 ## Integration with Traefik
 
 Pi-hole automatically registers with Traefik using Docker labels:
-- URL: `http://pihole.homelab.local/admin`
+- URL: `http://pihole.home/admin`
 - No manual Traefik configuration needed
 - Ensure both containers can communicate
 

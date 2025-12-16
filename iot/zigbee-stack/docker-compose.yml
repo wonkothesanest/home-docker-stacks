@@ -18,7 +18,7 @@ services:
     labels:
       # Enable Traefik for Zigbee2MQTT
       - "traefik.enable=true"
-      - "traefik.http.routers.zigbee2mqtt.rule=Host(`zigbee2mqtt.homelab.local`)"
+      - "traefik.http.routers.zigbee2mqtt.rule=Host(`zigbee2mqtt.home`)"
       - "traefik.http.routers.zigbee2mqtt.entrypoints=web"
     networks:
       - default

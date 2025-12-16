@@ -7,3 +7,4 @@ pihole/
 # dnsmasq.d - ignore auto-generated files, but track custom configs
 dnsmasq.d/*
 !dnsmasq.d/02-homelab-local.conf
+!dnsmasq.d/02-home.conf

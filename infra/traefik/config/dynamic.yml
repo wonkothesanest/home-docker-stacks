@@ -7,104 +7,104 @@ http:
   routers:
     # Kibana - Data visualization and exploration tool
     kibana:
-      rule: "Host(`kibana.homelab.local`)"
+      rule: "Host(`kibana.home`)"
       entryPoints:
         - "web"
       service: "kibana"
 
     # Elasticsearch - Search and analytics engine
     elasticsearch:
-      rule: "Host(`es.homelab.local`) || Host(`elasticsearch.homelab.local`)"
+      rule: "Host(`es.home`) || Host(`elasticsearch.home`)"
       entryPoints:
         - "web"
       service: "elasticsearch"
 
     # n8n - Workflow automation (commented out, uncomment to enable)
     n8n:
-      rule: "Host(`n8n.homelab.local`)"
+      rule: "Host(`n8n.home`)"
       entryPoints:
         - "web"
       service: "n8n"
 
   # Prefect - Workflow orchestration (commented out, uncomment to enable)
     prefect:
-      rule: "Host(`prefect.homelab.local`)"
+      rule: "Host(`prefect.home`)"
       entryPoints:
         - "web"
       service: "prefect"
 
   # Neo4j - Graph database (commented out, uncomment to enable)
     neo4j:
-      rule: "Host(`neo4j.homelab.local`)"
+      rule: "Host(`neo4j.home`)"
       entryPoints:
         - "web"
       service: "neo4j"
 
   # NeoDash - Neo4j visualization dashboard (commented out, uncomment to enable)
     neodash:
-      rule: "Host(`neodash.homelab.local`)"
+      rule: "Host(`neodash.home`)"
       entryPoints:
         - "web"
       service: "neodash"
 
     # Homepage - Dashboard (commented out, uncomment to enable)
     # homepage:
-    #   rule: "Host(`homepage.homelab.local`)"
+    #   rule: "Host(`homepage.home`)"
     #   entryPoints:
     #     - "web"
     #   service: "homepage"
     # Pi-hole - Network-wide ad blocking (runs on orangepi5b with host networking)
     pihole:
-      rule: "Host(`pihole.homelab.local`)"
+      rule: "Host(`pihole.home`)"
       entryPoints:
         - "web"
       service: "pihole"
 
     # MCP Server - Model Context Protocol (commented out, uncomment to enable)
     mcp:
-      rule: "Host(`mcp.homelab.local`)"
+      rule: "Host(`mcp.home`)"
       entryPoints:
         - "web"
       service: "mcp"
 
     # Portainer - Container management (HTTPS backend)
     portainer:
-      rule: "Host(`portainer.homelab.local`)"
+      rule: "Host(`portainer.home`)"
       entryPoints:
         - "web"
       service: "portainer"
 
     # Mosquitto - MQTT web interface
     mosquitto:
-      rule: "Host(`mosquitto.homelab.local`)"
+      rule: "Host(`mosquitto.home`)"
       entryPoints:
         - "web"
       service: "mosquitto"
 
     # RabbitMQ - Message broker management interface
     rabbitmq:
-      rule: "Host(`rabbitmq.homelab.local`)"
+      rule: "Host(`rabbitmq.home`)"
       entryPoints:
         - "web"
       service: "rabbitmq"
 
     # OpenHAB - Home automation platform
     openhab:
-      rule: "Host(`openhab.homelab.local`)"
+      rule: "Host(`openhab.home`)"
       entryPoints:
         - "web"
       service: "openhab"
 
     # Traefik Dashboard - Proxy dashboard
     traefik-dashboard:
-      rule: "Host(`traefik.homelab.local`)"
+      rule: "Host(`traefik.home`)"
       entryPoints:
         - "web"
       service: "traefik-dashboard"
 
     # LibreChat - LLM Chat Interface
     librechat:
-      rule: "Host(`librechat.homelab.local`)"
+      rule: "Host(`librechat.home`)"
       entryPoints:
         - "web"
       service: "librechat"

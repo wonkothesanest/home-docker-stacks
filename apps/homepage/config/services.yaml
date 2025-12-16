@@ -1,58 +1,58 @@
 - Server:
     - Elasticsearch:
         icon: elasticsearch
-        href: http://elasticsearch.homelab.local
+        href: http://elasticsearch.home
     - Kibana:
         icon: kibana
-        href: http://kibana.homelab.local
+        href: http://kibana.home
     - Neo4j Browser:
         icon: neo4j
-        href: http://neo4j.homelab.local
+        href: http://neo4j.home
     - Neo4j Bolt:
         icon: neo4j
         href: http://wonko.local:7687
     - Neodash:
         icon: neo4j
-        href: http://neodash.homelab.local
+        href: http://neodash.home
 
 - Workflows:
     - Prefect:
         description: Prefect Server
         icon: apache-airflow
-        href: http://prefect.homelab.local/dashboard
+        href: http://prefect.home/dashboard
     - N8N:
         icon: n8n
-        href: http://n8n.homelab.local
+        href: http://n8n.home
 
 - LLMs:
     - LibreChat:
         icon: librechat
-        href: http://librechat.homelab.local
+        href: http://librechat.home
 
 - OrangePi5B:
     - OpenHAB:
         icon: openhab
-        href: http://openhab.homelab.local
+        href: http://openhab.home
     - Portainer:
         icon: portainer
-        href: http://portainer.homelab.local
+        href: http://portainer.home
     - Zigbee2MQTT:
         icon: zigbee2mqtt
-        href: http://zigbee2mqtt.homelab.local
+        href: http://zigbee2mqtt.home
     - Mosquitto MQTT Broker:
         icon: mqtt
-        href: http://mosquitto.homelab.local
+        href: http://mosquitto.home
     - Rabbit MQ:
         icon: rabbitmq
-        href: http://rabbitmq.homelab.local
+        href: http://rabbitmq.home
 
 - Networking:
     - Pi-hole:
         icon: pi-hole
-        href: http://pihole.homelab.local
+        href: http://pihole.home
     - Tailscale:
         icon: tailscale
         href: https://login.tailscale.com/admin/machines
     - Traefik:
         icon: traefik
-        href: http://traefik.homelab.local
+        href: http://traefik.home

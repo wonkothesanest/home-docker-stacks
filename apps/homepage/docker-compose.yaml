@@ -17,7 +17,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.homepage.entrypoints=web"
-        #- "traefik.http.routers.homepage.rule=Host(`homepage.homelab.local`)"
+        #- "traefik.http.routers.homepage.rule=Host(`homepage.home`)"
     networks:
       - default
       - traefik-network

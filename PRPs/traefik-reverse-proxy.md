@@ -26,8 +26,8 @@ Implement Traefik v3 reverse proxy on orangepi5b.local with:
 ### Success Criteria
 - [ ] Traefik container running on orangepi5b.local with Docker provider enabled
 - [ ] Dashboard accessible at `traefik.orangepi5b.local:9080` or `http://orangepi5b.local:9080`
-- [ ] Kibana accessible via Traefik at clean URL (e.g., `kibana.homelab.local` or via orangepi5b address)
-- [ ] Elasticsearch accessible via Traefik at clean URL (e.g., `elasticsearch.homelab.local`)
+- [ ] Kibana accessible via Traefik at clean URL (e.g., `kibana.home` or via orangepi5b address)
+- [ ] Elasticsearch accessible via Traefik at clean URL (e.g., `elasticsearch.home`)
 - [ ] File provider configured for cross-host routing to wonko.local services
 - [ ] Local services on orangepi5b (Portainer, Zigbee) optionally routed via Traefik labels
 - [ ] No existing services are broken (all services still accessible via direct ports)
@@ -274,7 +274,7 @@ STATIC CONFIG (set at startup via command arguments):
 
 DYNAMIC CONFIG - Docker Provider (labels on local containers):
   traefik.enable: "true"           # Required when exposedByDefault=false
-  traefik.http.routers.<name>.rule: "Host(`service.homelab.local`)"
+  traefik.http.routers.<name>.rule: "Host(`service.home`)"
   traefik.http.routers.<name>.entrypoints: "web"
   traefik.http.services.<name>.loadbalancer.server.port: "8080"
   traefik.docker.network: "traefik-network"  # If service on multiple networks
@@ -283,12 +283,12 @@ DYNAMIC CONFIG - File Provider (config/dynamic.yml for wonko.local services):
 http:
   routers:
     kibana:
-      rule: "Host(`kibana.homelab.local`)"
+      rule: "Host(`kibana.home`)"
       entryPoints: ["web"]
       service: "kibana"
 
     elasticsearch:
-      rule: "Host(`elasticsearch.homelab.local`) || Host(`es.homelab.local`)"
+      rule: "Host(`elasticsearch.home`) || Host(`es.home`)"
       entryPoints: ["web"]
       service: "elasticsearch"
 
@@ -323,7 +323,7 @@ Task 1: Create Traefik Infrastructure on orangepi5b.local
     - Set restart: unless-stopped
 
   CREATE infra/traefik/.env.example:
-    - DOMAIN=homelab.local  # Base domain for services
+    - DOMAIN=home  # Base domain for services
     - WONKO_HOST=wonko.local  # Hostname/IP of wonko.local for routing
     - Add comments explaining each variable
 
@@ -333,8 +333,8 @@ Task 1: Create Traefik Infrastructure on orangepi5b.local
 Task 2: Create Dynamic Configuration for wonko.local Services
   CREATE infra/traefik/config/dynamic.yml:
     - Define HTTP routers for:
-        * kibana: Host(`kibana.homelab.local`) → wonko.local:5601
-        * elasticsearch: Host(`es.homelab.local`) → wonko.local:9200
+        * kibana: Host(`kibana.home`) → wonko.local:5601
+        * elasticsearch: Host(`es.home`) → wonko.local:9200
     - Define HTTP services with loadBalancer servers pointing to wonko.local
     - Use YAML format (not TOML)
     - Include comments explaining each section
@@ -377,8 +377,8 @@ Task 5: Test File Provider Routing to Kibana (wonko.local)
     - If fails: Check network connectivity between hosts
 
   TEST Traefik routing:
-    - Add DNS/hosts entry: kibana.homelab.local → orangepi5b.local IP
-    - FROM any device: curl http://kibana.homelab.local
+    - Add DNS/hosts entry: kibana.home → orangepi5b.local IP
+    - FROM any device: curl http://kibana.home
     - Should return Kibana HTML (routed through Traefik)
 
   CHECK Traefik dashboard:
@@ -393,16 +393,16 @@ Task 5: Test File Provider Routing to Kibana (wonko.local)
     - Check Traefik logs: docker compose logs traefik
 
 Task 6: Test File Provider Routing to Elasticsearch (wonko.local)
-  ADD DNS/hosts entry: es.homelab.local → orangepi5b.local IP
+  ADD DNS/hosts entry: es.home → orangepi5b.local IP
 
   TEST Elasticsearch routing:
-    - FROM any device: curl http://es.homelab.local
+    - FROM any device: curl http://es.home
     - Should return Elasticsearch JSON response (routed through Traefik)
     - Verify in Traefik dashboard (should see "elasticsearch" router/service)
 
   VERIFY both services work:
-    - curl http://kibana.homelab.local/api/status
-    - curl http://es.homelab.local/_cluster/health
+    - curl http://kibana.home/api/status
+    - curl http://es.home/_cluster/health
 
   SUCCESS CRITERIA:
     - Both Kibana and Elasticsearch accessible via Traefik
@@ -419,7 +419,7 @@ Task 7: Optional - Add Local Service via Docker Provider (Portainer)
           - traefik-network
         labels:
           - "traefik.enable=true"
-          - "traefik.http.routers.portainer.rule=Host(`portainer.homelab.local`)"
+          - "traefik.http.routers.portainer.rule=Host(`portainer.home`)"
           - "traefik.http.routers.portainer.entrypoints=web"
           - "traefik.http.services.portainer.loadbalancer.server.port=9443"
           - "traefik.http.services.portainer.loadbalancer.server.scheme=https"
@@ -431,7 +431,7 @@ Task 7: Optional - Add Local Service via Docker Provider (Portainer)
             external: true
 
   VERIFY:
-    - curl -Ik https://portainer.homelab.local (routed through Traefik)
+    - curl -Ik https://portainer.home (routed through Traefik)
     - Traefik dashboard shows portainer router (auto-discovered via labels)
 
 Task 8: Create Integration Documentation
@@ -467,7 +467,7 @@ Task 9: Optional - Enable HTTPS Redirect
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
 
   VERIFY:
-    - curl -I http://kibana.homelab.local (should return 301/308 to https://)
+    - curl -I http://kibana.home (should return 301/308 to https://)
     - Browser access redirects to HTTPS (will show certificate warning with self-signed cert)
 
   NEXT STEPS for production:
@@ -493,18 +493,18 @@ Task 11: Final Validation and Cleanup
   VERIFY ALL on orangepi5b.local:
     - Traefik container running: docker compose ps
     - Dashboard accessible: http://orangepi5b.local:9080/dashboard/
-    - Kibana accessible via Traefik: curl http://kibana.homelab.local
-    - Elasticsearch accessible via Traefik: curl http://es.homelab.local
+    - Kibana accessible via Traefik: curl http://kibana.home
+    - Elasticsearch accessible via Traefik: curl http://es.home
     - Original ports still work on wonko.local (5601, 9200)
     - Traefik dashboard shows both routers and services (kibana, elasticsearch)
     - File provider config is loaded (check dashboard: Providers > file)
 
   TEST from external device (not orangepi5b or wonko):
     - Add DNS entries or /etc/hosts:
-        <orangepi5b-IP> kibana.homelab.local
-        <orangepi5b-IP> es.homelab.local
-    - curl http://kibana.homelab.local
-    - curl http://es.homelab.local
+        <orangepi5b-IP> kibana.home
+        <orangepi5b-IP> es.home
+    - curl http://kibana.home
+    - curl http://es.home
     - Both should work (traffic routed through orangepi5b to wonko.local)
 
   CLEANUP:
@@ -590,20 +590,20 @@ http:
   # Routers define how to match requests
   routers:
     kibana:
-      rule: "Host(`kibana.homelab.local`)"
+      rule: "Host(`kibana.home`)"
       entryPoints:
         - "web"
       service: "kibana"
 
     elasticsearch:
-      rule: "Host(`es.homelab.local`) || Host(`elasticsearch.homelab.local`)"
+      rule: "Host(`es.home`) || Host(`elasticsearch.home`)"
       entryPoints:
         - "web"
       service: "elasticsearch"
 
     # Add more services as needed
     # n8n:
-    #   rule: "Host(`n8n.homelab.local`)"
+    #   rule: "Host(`n8n.home`)"
     #   entryPoints:
     #     - "web"
     #   service: "n8n"
@@ -649,7 +649,7 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`portainer.homelab.local`)"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.home`)"
       - "traefik.http.routers.portainer.entrypoints=web"
       - "traefik.http.services.portainer.loadbalancer.server.port=9443"
       - "traefik.http.services.portainer.loadbalancer.server.scheme=https"
@@ -731,8 +731,8 @@ NETWORK INTEGRATION:
 EXISTING STACKS TO ROUTE VIA FILE PROVIDER (wonko.local):
   Initial Implementation:
     - data/search-stack/ (Elasticsearch port 9200, Kibana port 5601)
-      * Add to dynamic.yml: es.homelab.local → wonko.local:9200
-      * Add to dynamic.yml: kibana.homelab.local → wonko.local:5601
+      * Add to dynamic.yml: es.home → wonko.local:9200
+      * Add to dynamic.yml: kibana.home → wonko.local:5601
 
   Future Additions (add to dynamic.yml as needed):
     - apps/n8n-stack/ (n8n port 5678)
@@ -747,17 +747,17 @@ LOCAL orangepi5b.local SERVICES (optional Docker provider integration):
 
 ENVIRONMENT VARIABLES:
   CREATE infra/traefik/.env on orangepi5b.local:
-    - DOMAIN=homelab.local
+    - DOMAIN=home
     - WONKO_HOST=wonko.local  # or wonko.local IP address
 
   NO CHANGES to existing service .env files on wonko.local
 
 DNS/HOSTS FILE CONFIGURATION:
   ADD to /etc/hosts on client machines (or configure DNS server):
-    <orangepi5b-IP> traefik.homelab.local
-    <orangepi5b-IP> kibana.homelab.local
-    <orangepi5b-IP> es.homelab.local
-    <orangepi5b-IP> elasticsearch.homelab.local
+    <orangepi5b-IP> traefik.home
+    <orangepi5b-IP> kibana.home
+    <orangepi5b-IP> es.home
+    <orangepi5b-IP> elasticsearch.home
 
   ALTERNATIVE: Use wildcard DNS like nip.io:
     - kibana.192.168.1.50.nip.io (assuming 192.168.1.50 is orangepi5b IP)
@@ -767,7 +767,7 @@ PORTAINER DEPLOYMENT:
   - Traefik stack managed via Portainer on orangepi5b.local
   - Add stack from Git repo OR manual compose file
   - Set environment variables in Portainer UI:
-      * DOMAIN=homelab.local
+      * DOMAIN=home
       * WONKO_HOST=wonko.local
   - Deploy stack to orangepi5b.local
   - Portainer will pull updates from Git when configured
@@ -831,12 +831,12 @@ curl -I http://wonko.local:9200  # Test Elasticsearch direct access
 # Expected: Both return 200 OK (if services running on wonko.local)
 
 # FROM any machine with DNS/hosts configured - Test Traefik routing
-# (Add to /etc/hosts: <orangepi5b-IP> kibana.homelab.local es.homelab.local)
+# (Add to /etc/hosts: <orangepi5b-IP> kibana.home es.home)
 
-curl -I http://kibana.homelab.local
+curl -I http://kibana.home
 # Expected: 200 OK, routed through Traefik to wonko.local:5601
 
-curl -I http://es.homelab.local
+curl -I http://es.home
 # Expected: 200 OK, routed through Traefik to wonko.local:9200
 
 # Verify Traefik dashboard shows File provider services
@@ -856,11 +856,11 @@ curl http://orangepi5b.local:9080/api/overview | jq '.providers'
 # Test service functionality (not just Traefik routing)
 
 # Kibana health check
-curl http://kibana.homelab.local/api/status | jq '.status.overall.state'
+curl http://kibana.home/api/status | jq '.status.overall.state'
 # Expected: "green"
 
 # Elasticsearch cluster health
-curl http://es.homelab.local/_cluster/health | jq '.status'
+curl http://es.home/_cluster/health | jq '.status'
 # Expected: "yellow" or "green"
 
 # Test that original ports still work (backward compatibility)
@@ -869,8 +869,8 @@ curl -I http://wonko.local:9200  # Elasticsearch direct access
 # Expected: Both return 200 OK
 
 # Test FROM different machine on network (not orangepi5b or wonko)
-# Add to /etc/hosts: <orangepi5b-IP> kibana.homelab.local
-# Browser: http://kibana.homelab.local
+# Add to /etc/hosts: <orangepi5b-IP> kibana.home
+# Browser: http://kibana.home
 # Expected: Kibana UI loads (routed orangepi5b → wonko.local)
 ```
 
@@ -879,11 +879,11 @@ curl -I http://wonko.local:9200  # Elasticsearch direct access
 # Only after enabling HTTPS redirect (Task 9)
 
 # Test redirect
-curl -I http://kibana.homelab.local
-# Expected: 301 or 308 redirect to https://kibana.homelab.local
+curl -I http://kibana.home
+# Expected: 301 or 308 redirect to https://kibana.home
 
 # Test HTTPS (will fail cert validation without proper certs)
-curl -Ik https://kibana.homelab.local
+curl -Ik https://kibana.home
 # Expected: 200 OK (with -k to skip cert validation)
 
 # Without -k flag, should see certificate error (expected with self-signed cert)
@@ -893,8 +893,8 @@ curl -Ik https://kibana.homelab.local
 - [ ] Traefik container running on orangepi5b.local: `docker compose ps`
 - [ ] Dashboard accessible: http://orangepi5b.local:9080/dashboard/
 - [ ] Network created on orangepi5b: `docker network ls | grep traefik-network`
-- [ ] Kibana accessible via Traefik: `curl http://kibana.homelab.local`
-- [ ] Elasticsearch accessible via Traefik: `curl http://es.homelab.local`
+- [ ] Kibana accessible via Traefik: `curl http://kibana.home`
+- [ ] Elasticsearch accessible via Traefik: `curl http://es.home`
 - [ ] Both services visible in Traefik dashboard (HTTP > Routers, HTTP > Services)
 - [ ] File provider loaded: Dashboard shows "file" provider under Providers
 - [ ] Original wonko.local ports still work: `curl http://wonko.local:5601`
@@ -931,7 +931,7 @@ grep -r "192.168" infra/traefik/   # Check for hardcoded IPs (should only be in 
 - ❌ Don't mount Docker socket as read-write - use `:ro` flag
 - ❌ Don't remove wonko.local port mappings - they're needed for Traefik to reach services
 - ❌ Don't use `--api.insecure=true` in production - add auth middleware
-- ❌ Don't put actual values in .env.example - use placeholders like `DOMAIN=homelab.local`
+- ❌ Don't put actual values in .env.example - use placeholders like `DOMAIN=home`
 - ❌ Don't commit .env file to git - only commit .env.example
 - ❌ Don't hardcode IPs in dynamic.yml - use hostnames (wonko.local, not 192.168.x.x)
 - ❌ Don't use HTTP→HTTPS redirect without proper certificates (scary browser warnings)
@@ -985,7 +985,7 @@ PORTAINER DEPLOYMENT STEPS:
      - Repository reference: main (or your branch)
      - Compose path: infra/traefik/docker-compose.yml
   2. Set Environment Variables in Portainer UI:
-     - DOMAIN=homelab.local
+     - DOMAIN=home
      - WONKO_HOST=wonko.local
   3. Deploy stack
   4. Portainer will automatically pull updates when you push to GitHub
@@ -1034,7 +1034,7 @@ VALIDATION:
 
 **Expected Outcome:**
 - AI agent successfully deploys Traefik on orangepi5b.local
-- Kibana and Elasticsearch accessible via clean URLs (kibana.homelab.local, es.homelab.local)
+- Kibana and Elasticsearch accessible via clean URLs (kibana.home, es.home)
 - File provider routing works cross-host (orangepi5b → wonko.local)
 - Stack deployable from GitHub via Portainer
 - Any issues resolvable using troubleshooting steps and validation gates provided

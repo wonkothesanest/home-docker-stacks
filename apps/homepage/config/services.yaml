@@ -49,7 +49,7 @@
 - Networking:
     - Pi-hole:
         icon: pi-hole
-        href: http://pihole.home
+        href: http://pihole.home/admin
     - Tailscale:
         icon: tailscale
         href: https://login.tailscale.com/admin/machines

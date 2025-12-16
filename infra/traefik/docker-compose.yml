@@ -26,7 +26,7 @@ services:
       - "--api.insecure=true"  # Only for dev; use auth middleware for production
 
       # Logging
-      - "--log.level=INFO"
+      - "--log.level=DEBUG"
       - "--accesslog=true"                   # Enable access log
       - "--accesslog.bufferingsize=0"        # Flush on every line (no buffering)
       - "--accesslog.format=json"            # Easier to grep/jq

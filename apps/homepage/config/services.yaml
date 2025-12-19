@@ -7,10 +7,10 @@
         href: http://kibana.home
     - Neo4j Browser:
         icon: neo4j
-        href: http://neo4j.home
+        href: http://neo4j.omnidian.home
     - Neo4j Bolt:
         icon: neo4j
-        href: http://wonko.local:7687
+        href: http://neo4j.bolt.omnidian.home
     - Neodash:
         icon: neo4j
         href: http://neodash.home

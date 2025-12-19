@@ -14,7 +14,7 @@ http:
 
     # Elasticsearch - Search and analytics engine
     elasticsearch:
-      rule: "Host(`es.home`) || Host(`elasticsearch.home`)"
+      rule: "Host(`es.home`) || Host(`elasticsearch.home`) || Host(`elasticsearch.omnidian.home`)"
       entryPoints:
         - "web"
       service: "elasticsearch"
@@ -34,11 +34,16 @@ http:
       service: "prefect"
 
   # Neo4j - Graph database (commented out, uncomment to enable)
-    neo4j:
-      rule: "Host(`neo4j.home`)"
+    neo4j-work-memories:
+      rule: "Host(`neo4j.omnidian.home`)"
       entryPoints:
         - "web"
-      service: "neo4j"
+      service: "neo4j-work-memories"
+    neo4j-bolt-work-memories:
+      rule: "Host(`bolt.neo4j.omnidian.home`)"
+      entryPoints:
+        - "web"
+      service: "neo4j-bolt-work-memories"
 
   # NeoDash - Neo4j visualization dashboard (commented out, uncomment to enable)
     neodash:
@@ -136,10 +141,14 @@ http:
           - url: "http://wonko.local:4200"
 
     # Neo4j service pointing to wonko.local:7475
-    neo4j:
+    neo4j-work-memories:
       loadBalancer:
         servers:
           - url: "http://wonko.local:7475"
+    neo4j-bolt-work-memories:
+      loadBalancer:
+        servers:
+          - url: "http://wonko.local:7688"
 
     # NeoDash service pointing to wonko.local:5005
     neodash:

@@ -39,11 +39,11 @@ http:
       entryPoints:
         - "web"
       service: "neo4j-work-memories"
-    neo4j-bolt-work-memories:
-      rule: "Host(`bolt.neo4j.omnidian.home`)"
-      entryPoints:
-        - "web"
-      service: "neo4j-bolt-work-memories"
+   # neo4j-bolt-work-memories:
+   #   rule: "Host(`bolt.neo4j.omnidian.home`)"
+   #   entryPoints:
+   #     - "web"
+   #   service: "neo4j-bolt-work-memories"
 
   # NeoDash - Neo4j visualization dashboard (commented out, uncomment to enable)
     neodash:
@@ -113,7 +113,7 @@ http:
       entryPoints:
         - "web"
       service: "librechat"
-
+  
   # Services define backend servers
   services:
     # Kibana service pointing to wonko.local:5601
@@ -145,10 +145,10 @@ http:
       loadBalancer:
         servers:
           - url: "http://wonko.local:7475"
-    neo4j-bolt-work-memories:
-      loadBalancer:
-        servers:
-          - url: "http://wonko.local:7688"
+   # neo4j-bolt-work-memories:
+   #   loadBalancer:
+   #     servers:
+   #       - url: "bolt://wonko.local:7688"
 
     # NeoDash service pointing to wonko.local:5005
     neodash:
@@ -210,3 +210,16 @@ http:
   serversTransports:
     insecureTransport:
       insecureSkipVerify: true
+
+tcp:
+  routers:
+    neo4j-bolt:
+      entryPoints: ["bolt"]
+      rule: "HostSNI(`*`)"
+      service: neo4j-bolt-svc
+
+  services:
+    neo4j-bolt-svc:
+      loadBalancer:
+        servers:
+          - address: "wonko.local:7688"

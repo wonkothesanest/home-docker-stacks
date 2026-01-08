@@ -8,6 +8,7 @@ services:
       # Entry Points
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.bolt.address=:7687"
 
       # Docker Provider (for local orangepi5b containers)
       - "--providers.docker=true"
@@ -38,6 +39,7 @@ services:
       - "80:80"       # HTTP entry point
       - "443:443"     # HTTPS entry point
       - "9080:8080"   # Dashboard (9080 on host to avoid conflict, 8080 internal)
+      - "7687:7687"   # bolt protocol
 
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"  # Docker API access for local containers

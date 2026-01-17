@@ -65,6 +65,12 @@ http:
         - "web"
       service: "pihole"
 
+    pihole2:
+      rule: "Host(`pihole2.home`)"
+      entryPoints:
+        - "web"
+      service: "pihole2"
+
     # MCP Server - Model Context Protocol (commented out, uncomment to enable)
     mcp:
       rule: "Host(`mcp.home`)"
@@ -168,6 +174,10 @@ http:
       loadBalancer:
         servers:
           - url: "http://pi.hole:8082/admin"
+    pihole2:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.50.43:8082/admin"
 
     # Portainer service pointing to orangepi5b:9443 (HTTPS)
     portainer:

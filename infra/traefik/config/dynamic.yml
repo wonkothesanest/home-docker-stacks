@@ -141,6 +141,15 @@ http:
         - "web"
       service: "duplicati-wonko"
 
+    # Trade Goblin Stuff.
+    trading-agents-api:
+      rule: "Host(`api.trading-agents.trade-goblin.home`)"
+      entryPoints:
+        - "web"
+      service: "trading-agents-api"
+
+
+
   # Services define backend servers
   services:
     # Kibana service pointing to wonko.local:5601
@@ -254,6 +263,12 @@ http:
       loadBalancer:
         servers:
           - url: "http://wonko.local:8221"
+
+
+    trading-agents-api:
+      loadBalancer:
+        servers:
+          - url: "http://wonko.local:8123"
 
   # ServersTransport for HTTPS backends with self-signed certificates
   serversTransports:

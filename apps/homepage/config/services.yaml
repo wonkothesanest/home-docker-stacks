@@ -73,5 +73,5 @@
 - Trade Goblin:
     - Trading Agents API:
         icon: api
-        href: http://api.trading-agents.trade-goblin.home
+        href: http://api.trading-agents.trade-goblin.home/docs
         description: API for trading agents (custom service)

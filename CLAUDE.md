@@ -15,6 +15,8 @@ This repository contains Docker Compose stacks for a multi-host home infrastruct
 - Portainer Server (infra/portainer) - Container management UI
 - Tailscale (infra/tailscale) - Subnet router for secure remote access to entire home LAN
 - Pi-hole (infra/pihole) - Network-wide ad blocking and DNS management (deploy from file system, not Portainer git)
+- WUD (infra/wud) - Docker image update monitoring with web UI
+- Duplicati (infra/duplicati) - Encrypted backups to cloud storage with web UI
 - Zigbee2MQTT + Mosquitto (iot/zigbee-stack) - IoT device communication
 
 **wonko.local (Local Workstation)**
@@ -24,6 +26,7 @@ This repository contains Docker Compose stacks for a multi-host home infrastruct
 - Neo4j + NeoDash (data/neo4j) - Graph database and visualization
 - Homepage (apps/homepage) - Dashboard with custom Docker build
 - MCP Server (infra/mcp) - Model Context Protocol server with ES integration
+- Duplicati (infra/duplicati) - Encrypted backups to cloud storage with web UI
 - Tailscale (infra/tailscale) - Client node accepting routes from orangepi5b subnet router
 
 ### Stack Organization
@@ -31,7 +34,7 @@ This repository contains Docker Compose stacks for a multi-host home infrastruct
 ```
 apps/         - Application services (n8n, prefect, homepage)
 data/         - Data infrastructure (elasticsearch, neo4j)
-infra/        - Infrastructure services (traefik, portainer, tailscale, pihole, mcp)
+infra/        - Infrastructure services (traefik, portainer, tailscale, pihole, mcp, wud, duplicati)
 iot/          - IoT services (zigbee, mosquitto)
 ```
 
@@ -144,12 +147,36 @@ Pi-hole (infra/pihole) provides network-wide DNS and ad blocking:
 - Web interface accessible via `pihole.home/admin` (Traefik) or direct port 8082
 - See stack README for setup and troubleshooting
 
+### Monitoring and Backup
+
+**WUD (infra/wud)** - What's Up Docker:
+- Web UI dashboard showing Docker container update status
+- Monitors all Docker containers for available image updates
+- Sends notifications via Ntfy, Email, Discord, Slack, Telegram, Gotify, Pushover, Apprise
+- Supports webhooks for automation (can trigger n8n workflows)
+- Runs on configurable schedule (default: every 6 hours)
+- Web UI accessible on port 3000 or via Traefik at `wud.home`
+- Requires web UI authentication configured in `.env`
+
+**Duplicati (infra/duplicati)** - Encrypted Cloud Backups with Web UI:
+- Web UI for managing backups (port 8200 on orangepi5b, 8201 on wonko)
+- AES-256 encryption for all backups
+- Supports 20+ cloud providers (S3, Backblaze B2, Azure, Google Drive, OneDrive, Dropbox, WebDAV, SFTP, etc.)
+- Block-level deduplication and compression
+- Configurable schedules and retention policies
+- Email notifications on backup success/failure
+- Version history and incremental backups
+- Multi-host setup: separate docker-compose files for orangepi5b and wonko
+- Access via Traefik: `backup-orangepi5b.home` and `backup-wonko.home`
+
 ### Port Mappings
 
 Key service ports:
 - Traefik: 80 (HTTP), 443 (HTTPS), 9080 (dashboard)
 - Portainer: 9443 (HTTPS), 8000 (tunnel)
 - Pi-hole: 53 (DNS TCP/UDP), 8082 (web interface)
+- WUD: 3000 (web UI)
+- Duplicati: 8200 (orangepi5b), 8201 (wonko)
 - n8n: 5678
 - Prefect: 4200 (UI), 8080 (API)
 - Elasticsearch: 9200

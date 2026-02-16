@@ -70,3 +70,8 @@
         icon: duplicati
         href: http://wonko.backup.home
         description: Duplicati backup for Wonko
+- Trade Goblin:
+    - Trading Agents API:
+        icon: api
+        href: http://api.trading-agents.trade-goblin.home
+        description: API for trading agents (custom service)

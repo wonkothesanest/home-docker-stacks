@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    restart: unless-stopped
+    ports:
+      - "${DUPLICATI_PORT:-8200}:8200"
+    volumes:
+      # Duplicati configuration and database
+      - ./config:/config
+
+      # Backup source directories
+      # Mount all volumes and directories you want to backup as read-only
+      - /var/lib/docker/volumes:/source/docker-volumes:ro
+
+      # Individual important volumes (easier to select in UI)
+      - portainer_data:/source/volumes/portainer:ro
+      - pihole_data:/source/volumes/pihole:ro
+      - traefik_data:/source/volumes/traefik:ro
+
+      # Backup destination (optional local backup before uploading to cloud)
+      - ./backups:/backups
+
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-America/Los_Angeles}
+      - CLI_ARGS= #optional
+
+    labels:
+      # Traefik labels for reverse proxy
+      - traefik.enable=true
+      - traefik.http.routers.duplicati-orangepi5b.rule=Host(`backup-orangepi5b.${DOMAIN:-home}`)
+      - traefik.http.routers.duplicati-orangepi5b.entrypoints=web
+      - traefik.http.services.duplicati-orangepi5b.loadbalancer.server.port=8200
+
+networks:
+  default:
+    name: traefik-network
+    external: true
+
+# Import volumes to backup
+volumes:
+  portainer_data:
+    external: true
+  pihole_data:
+    external: true
+  traefik_data:
+    external: true

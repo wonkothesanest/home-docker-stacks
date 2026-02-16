@@ -56,3 +56,17 @@
     - Traefik:
         icon: traefik
         href: http://traefik.home
+
+- Monitoring & Backup:
+    - WUD (Docker Updates):
+        icon: docker
+        href: http://wud.home
+        description: What's Up Docker - Container update monitoring
+    - Backup (OrangePi5B):
+        icon: duplicati
+        href: http://orangepi5b.backup.home
+        description: Duplicati backup for OrangePi5B
+    - Backup (Wonko):
+        icon: duplicati
+        href: http://wonko.backup.home
+        description: Duplicati backup for Wonko

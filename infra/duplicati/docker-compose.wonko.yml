@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    restart: unless-stopped
+    ports:
+      - "${DUPLICATI_PORT:-8201}:8200"
+    volumes:
+      # Duplicati configuration and database
+      - ./config:/config
+
+      # Backup source directories
+      # Mount all volumes and directories you want to backup as read-only
+      - /var/lib/docker/volumes:/source/docker-volumes:ro
+
+      # Individual important volumes (easier to select in UI)
+      - n8n_n8n_data:/source/volumes/n8n:ro
+      - n8n_postgres_data:/source/volumes/n8n-postgres:ro
+      - prefect_data_getters_postgres_data:/source/volumes/prefect-postgres:ro
+      - prefect_data_getters_es_data:/source/volumes/elasticsearch:ro
+      - prefect_data_getters_neo4j_data:/source/volumes/neo4j:ro
+
+      # Backup destination (optional local backup before uploading to cloud)
+      - ./backups:/backups
+
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-America/Los_Angeles}
+      - CLI_ARGS= #optional
+
+    labels:
+      # No Traefik labels - wonko doesn't run Traefik
+      # Access directly via port
+
+networks:
+  default:
+    name: bridge
+
+# Import volumes to backup
+volumes:
+  n8n_n8n_data:
+    external: true
+  n8n_postgres_data:
+    external: true
+  prefect_data_getters_postgres_data:
+    external: true
+  prefect_data_getters_es_data:
+    external: true
+  prefect_data_getters_neo4j_data:
+    external: true

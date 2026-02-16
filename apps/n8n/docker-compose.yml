@@ -3,6 +3,8 @@ services:
   postgres:
     image: postgres:15
     restart: always
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -26,19 +28,20 @@ services:
       - N8N_PROTOCOL=${N8N_PROTOCOL}
       - N8N_PORT=${N8N_PORT}
       - WEBHOOK_TUNNEL_URL=${WEBHOOK_TUNNEL_URL}
+      - N8N_SECURE_COOKIE=false
     depends_on:
       - postgres
     volumes:
       - n8n_data:/home/node/.n8n
 
-  editly:
-    container_name: editly
-    image: editly/editly:latest
-    ports:
-      - "3000:3000"
-    volumes:
-      - "./editly_data:/outputs"
-      - "./editly/examples/assets/:/app/examples/assets/"
+        #  editly:
+        #    container_name: editly
+        #    image: editly/editly:latest
+        #   ports:
+        #      - "3000:3000"
+        #    volumes:
+        #      - "./editly_data:/outputs"
+        #      - "./editly/examples/assets/:/app/examples/assets/"
 
 volumes:
   postgres_data:

@@ -1,0 +1,12 @@
+# Environment variables
+.env
+
+# Duplicati configuration (contains passwords and keys)
+config/
+
+# Local backups
+backups/
+
+# Temporary files
+*.tmp
+*.log

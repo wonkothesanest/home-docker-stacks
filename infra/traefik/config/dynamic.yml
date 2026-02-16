@@ -119,7 +119,28 @@ http:
       entryPoints:
         - "web"
       service: "librechat"
-  
+
+    # WUD - What's Up Docker (orangepi5b)
+    wud:
+      rule: "Host(`wud.home`) || Host(`docker-updates.home`)"
+      entryPoints:
+        - "web"
+      service: "wud"
+
+    # Duplicati - Backup for orangepi5b
+    duplicati-orangepi5b:
+      rule: "Host(`orangepi5b.backup.home`) || Host(`backup.home`)"
+      entryPoints:
+        - "web"
+      service: "duplicati-orangepi5b"
+
+    # Duplicati - Backup for wonko
+    duplicati-wonko:
+      rule: "Host(`wonko.backup.home`)"
+      entryPoints:
+        - "web"
+      service: "duplicati-wonko"
+
   # Services define backend servers
   services:
     # Kibana service pointing to wonko.local:5601
@@ -215,6 +236,24 @@ http:
       loadBalancer:
         servers:
           - url: "http://wonko.local:3080"
+
+    # WUD pointing to orangepi5b:3000
+    wud:
+      loadBalancer:
+        servers:
+          - url: "http://orangepi5b.local:8230"
+
+    # Duplicati orangepi5b pointing to orangepi5b:8200
+    duplicati-orangepi5b:
+      loadBalancer:
+        servers:
+          - url: "http://orangepi5b.local:8220"
+
+    # Duplicati wonko pointing to wonko:8201
+    duplicati-wonko:
+      loadBalancer:
+        servers:
+          - url: "http://wonko.local:8221"
 
   # ServersTransport for HTTPS backends with self-signed certificates
   serversTransports:

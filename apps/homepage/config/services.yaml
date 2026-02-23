@@ -25,9 +25,9 @@
         href: http://n8n.home
 
 - LLMs:
-    - LibreChat:
-        icon: librechat
-        href: http://librechat.home
+    - OpenWebUI:
+        icon: openwebui
+        href: http://openwebui.home
 
 - OrangePi5B:
     - OpenHAB:

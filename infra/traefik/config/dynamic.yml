@@ -148,6 +148,13 @@ http:
         - "web"
       service: "trading-agents-api"
 
+    # Trade Goblin Stuff.
+    open-webui:
+      rule: "Host(`openwebui.home`)"
+      entryPoints:
+        - "web"
+      service: "open-webui"
+
 
 
   # Services define backend servers
@@ -269,6 +276,12 @@ http:
       loadBalancer:
         servers:
           - url: "http://wonko.local:8123"
+
+    open-webui:
+      loadBalancer:
+        servers:
+          - url: "http://wonko.local:3111"
+
 
   # ServersTransport for HTTPS backends with self-signed certificates
   serversTransports:

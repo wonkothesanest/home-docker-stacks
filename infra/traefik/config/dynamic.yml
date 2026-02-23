@@ -155,6 +155,13 @@ http:
         - "web"
       service: "open-webui"
 
+    # MCP Inspector - Debug and inspect MCP servers
+    mcp-inspector:
+      rule: "Host(`mcp-inspector.home`)"
+      entryPoints:
+        - "web"
+      service: "mcp-inspector"
+
 
 
   # Services define backend servers
@@ -281,6 +288,13 @@ http:
       loadBalancer:
         servers:
           - url: "http://wonko.local:3111"
+
+    # MCP Inspector - UI at 6274
+    mcp-inspector:
+      loadBalancer:
+        servers:
+          - url: "http://wonko.local:6274"
+
 
 
   # ServersTransport for HTTPS backends with self-signed certificates

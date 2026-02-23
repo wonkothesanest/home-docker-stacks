@@ -1,0 +1,98 @@
+services:
+  mcpo:
+    image: ghcr.io/open-webui/mcpo:main
+    container_name: mcpo
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    volumes:
+      - ./mcpo-config.json:/app/config/config.json:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: ["mcpo", "--config", "/app/config/config.json", "--host", "0.0.0.0", "--port", "8000", "--hot-reload"]
+    depends_on:
+      - mcp-context7
+    environment:
+      - MCPO_LOG_LEVEL=INFO
+      - MCPO_API_KEY=${MCPO_API_KEY}
+  # ---------------------------------------------------------------------------
+  # MCP Inspector - Debug and inspect MCP server connections
+  # UI: http://mcp-inspector.home or http://wonko.local:6274
+  # Proxy: wonko.local:6277
+  # ---------------------------------------------------------------------------
+  mcp-inspector:
+    image: ghcr.io/modelcontextprotocol/inspector:latest
+    container_name: mcp-inspector
+    ports:
+      - "6274:6274"
+      - "6277:6277"
+    environment:
+      - HOST=0.0.0.0
+      - CLIENT_PORT=6274
+      - SERVER_PORT=6277
+      - MCP_AUTO_OPEN_ENABLED=false
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+
+
+  # ---------------------------------------------------------------------------
+  # MCP Elasticsearch - Elasticsearch search and analytics access
+  # SSE endpoint: http://mcp-elasticsearch:3000/sse  (internal)
+  # External: http://wonko.local:3204/sse
+  # ---------------------------------------------------------------------------
+  mcp-elasticsearch:
+    image: mcp/elasticsearch
+    container_name: mcp-elasticsearch
+    entrypoint: ["elasticsearch-core-mcp-server", "http"]
+    environment:
+      - ES_URL=${ELASTICSEARCH_HOSTS:-http://wonko.local:9200}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-}
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD:-}
+      - ES_API_KEY=${ELASTICSEARCH_API_KEY:-}
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+
+
+  # ---------------------------------------------------------------------------
+  # MCP Atlassian - Jira and Confluence access
+  # SSE endpoint: http://mcp-atlassian:8000/sse  (internal)
+  # External: http://wonko.local:3210/sse
+  # Requires: Jira/Confluence API tokens
+  # ---------------------------------------------------------------------------
+  mcp-atlassian:
+    image: mcp/atlassian
+    container_name: mcp-atlassian
+    command: ["--transport", "sse", "--port", "8000"]
+    environment:
+      # Jira Cloud
+      - JIRA_URL=${JIRA_URL:-}
+      - JIRA_USERNAME=${JIRA_USERNAME:-}
+      - JIRA_API_TOKEN=${JIRA_API_TOKEN:-}
+      
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+  # ---------------------------------------------------------------------------
+  # MCP Context7 - Up-to-date library documentation lookup
+  # SSE endpoint: http://mcp-context7:3000/sse  (internal)
+  # External: http://wonko.local:3211/sse
+  # ---------------------------------------------------------------------------
+  mcp-context7:
+    image: mcp/context7
+    container_name: mcp-context7
+    environment:
+      - TRANSPORT=sse
+      - PORT=3000
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+networks:
+  # Shared network - open-webui and other stacks join this as external
+  mcp-network:
+    name: mcp-network
+    driver: bridge

@@ -1,0 +1,36 @@
+{
+  "mcpServers": {
+    "context7": {
+      "type": "streamable-http",
+      "url": "http://mcp-context7:3000/mcp",
+      "headers": {
+        "Content-Type": "application/json",
+	    "Accept": "application/json, text/event-stream"
+      }
+    },
+    "work_rag": {
+      "type": "sse",
+      "url": "http://mcp_server:8000/sse",
+      "headers": {
+        "Content-Type": "application/json",
+	    "Accept": "application/json, text/event-stream"
+      }
+    },
+    "atlassian": {
+      "type": "sse",
+      "url": "http://mcp-atlassian:8000/sse",
+      "headers": {
+        "Content-Type": "application/json",
+	    "Accept": "application/json, text/event-stream"
+      }
+    },
+    "time": {
+      "command": "uvx",
+      "args": ["mcp-server-time", "--local-timezone=America/Denver"]
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch"]
+    }
+  }
+}

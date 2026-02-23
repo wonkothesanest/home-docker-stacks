@@ -28,6 +28,10 @@
     - OpenWebUI:
         icon: openwebui
         href: http://openwebui.home
+    - MCP Inspector:
+        icon: mdi-microscope
+        href: http://mcp-inspector.home
+        description: Inspect and debug MCP server connections
 
 - OrangePi5B:
     - OpenHAB:

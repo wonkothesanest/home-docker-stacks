@@ -1,0 +1,28 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      - "${PORT:-3111}:8080"
+    volumes:
+      - open-webui:/app/backend/data
+    environment:
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-changeme}
+      - WEBUI_NAME=${WEBUI_NAME:-Open WebUI}
+      # Ollama (optional - configure if running locally)
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-}
+      # OpenAI-compatible APIs (optional)
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - OPENAI_API_BASE_URL=${OPENAI_API_BASE_URL:-}
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+volumes:
+  open-webui:
+
+networks:
+  # Join the shared MCP network defined in apps/mcps
+  mcp-network:
+    external: true
+    name: mcp-network

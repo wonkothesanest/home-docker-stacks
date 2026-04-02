@@ -1,0 +1,24 @@
+http:
+  middlewares:
+    openclaw-strip:
+      stripPrefix:
+        prefixes:
+          - "/openclaw"
+
+
+  routers:
+    openclaw:
+      rule: "Host(`orangepi5b.coho-teeth.ts.net`) && PathPrefix(`/openclaw`)"
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: tailscale
+      middlewares:
+        - openclaw-strip
+      service: openclaw
+
+  services:
+    openclaw:
+      loadBalancer:
+        servers:
+          - url: "http://orangepi5b.local:18789"

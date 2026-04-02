@@ -17,6 +17,9 @@ services:
       # File Provider (for wonko.local services)
       - "--providers.file.directory=/etc/traefik/config"
       - "--providers.file.watch=true"
+      
+      # Tailscale certificate resolver
+      - "--certificatesresolvers.tailscale.tailscale=true"
 
       # Every container becomes <container-name>.<your-domain>
       - "--providers.docker.defaultrule=Host(`{{ index .Labels \"com.docker.compose.service\" }}.${DOMAIN}`)"
@@ -44,7 +47,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"  # Docker API access for local containers
       - "./config:/etc/traefik/config:ro"                # File provider config directory
-
+      - "/var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock"
     networks:
       - traefik-network
 

@@ -5,7 +5,7 @@ services:
     container_name: portainer
     restart: unless-stopped
     command:
-      - "--trust-origins=http://portainer.home"
+      - "--trusted-origins=portainer.home"
     ports:
       - "9443:9443"
       - "8000:8000"

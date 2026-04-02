@@ -162,6 +162,13 @@ http:
         - "web"
       service: "mcp-inspector"
 
+    # Work RAG - MCP server for work domain
+    work-rag:
+      rule: "Host(`work-rag.mcps.work.home`)"
+      entryPoints:
+        - "web"
+      service: "work-rag"
+
 
 
   # Services define backend servers
@@ -294,6 +301,12 @@ http:
       loadBalancer:
         servers:
           - url: "http://wonko.local:6274"
+
+    # Work RAG - MCP server for work domain
+    work-rag:
+      loadBalancer:
+        servers:
+          - url: "http://wonko.local:8000"
 
 
 

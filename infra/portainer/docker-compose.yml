@@ -4,6 +4,8 @@ services:
     image: portainer/portainer-ce:latest
     container_name: portainer
     restart: unless-stopped
+    command:
+      - "--trust-origins=http://portainer.home"
     ports:
       - "9443:9443"
       - "8000:8000"

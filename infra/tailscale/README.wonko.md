@@ -1,5 +1,10 @@
 # Tailscale Client Node (wonko)
 
+
+IMPORTANT! Wonko needs to have set accept-routes=false in order to work, we were gettting inability to use tailscale from the base machine without it. 
+This document more has to do with the docker contianer that is reachable but still important and related to tailscale.
+
+
 This node accepts routes from the subnet router (orangepi5b).
 
 ## Setup

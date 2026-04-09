@@ -71,12 +71,33 @@ http:
         - "web"
       service: "pihole2"
 
-    # MCP Server - Model Context Protocol (commented out, uncomment to enable)
+    # MCPO - MCP aggregator gateway
     mcp:
       rule: "Host(`mcp.home`)"
       entryPoints:
         - "web"
       service: "mcp"
+
+    # MCP Atlassian - Jira/Confluence SSE endpoint
+    mcp-atlassian:
+      rule: "Host(`atlassian.mcp.home`)"
+      entryPoints:
+        - "web"
+      service: "mcp-atlassian"
+
+    # MCP Context7 - Library documentation lookup SSE endpoint
+    mcp-context7:
+      rule: "Host(`context7.mcp.home`)"
+      entryPoints:
+        - "web"
+      service: "mcp-context7"
+
+    # MCP Elasticsearch - Elasticsearch search SSE endpoint
+    mcp-elasticsearch-server:
+      rule: "Host(`elasticsearch.mcp.home`)"
+      entryPoints:
+        - "web"
+      service: "mcp-elasticsearch-server"
 
     # Portainer - Container management (HTTPS backend)
     portainer:
@@ -157,7 +178,7 @@ http:
 
     # MCP Inspector - Debug and inspect MCP servers
     mcp-inspector:
-      rule: "Host(`mcp-inspector.home`)"
+      rule: "Host(`inspector.mcp.home`)"
       entryPoints:
         - "web"
       service: "mcp-inspector"
@@ -228,11 +249,29 @@ http:
           - url: "http://wonko.local:5005"
 
 
-    # MCP Server pointing to wonko.local:8000
+    # MCPO aggregator gateway pointing to wonko.local:8100
     mcp:
       loadBalancer:
         servers:
-          - url: "http://wonko.local:8000"
+          - url: "http://wonko.local:8100"
+
+    # MCP Atlassian SSE endpoint
+    mcp-atlassian:
+      loadBalancer:
+        servers:
+          - url: "http://wonko.local:8101"
+
+    # MCP Context7 SSE endpoint
+    mcp-context7:
+      loadBalancer:
+        servers:
+          - url: "http://wonko.local:8102"
+
+    # MCP Elasticsearch SSE endpoint
+    mcp-elasticsearch-server:
+      loadBalancer:
+        servers:
+          - url: "http://wonko.local:8103"
 
     # Pi-hole service pointing to localhost:8082 (runs on orangepi5b with host networking)
     pihole:

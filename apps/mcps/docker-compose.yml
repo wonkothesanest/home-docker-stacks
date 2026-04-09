@@ -3,6 +3,8 @@ services:
     image: ghcr.io/open-webui/mcpo:main
     container_name: mcpo
     restart: unless-stopped
+    ports:
+      - "8100:8000"
     networks:
       - mcp-network
     volumes:
@@ -30,6 +32,7 @@ services:
       - CLIENT_PORT=6274
       - SERVER_PORT=6277
       - MCP_AUTO_OPEN_ENABLED=false
+      - DANGEROUSLY_OMIT_AUTH=true
     restart: unless-stopped
     networks:
       - mcp-network
@@ -45,6 +48,8 @@ services:
     image: mcp/elasticsearch
     container_name: mcp-elasticsearch
     entrypoint: ["elasticsearch-core-mcp-server", "http"]
+    ports:
+      - "8103:3000"
     environment:
       - ES_URL=${ELASTICSEARCH_HOSTS:-http://wonko.local:9200}
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-}
@@ -66,6 +71,8 @@ services:
     image: mcp/atlassian
     container_name: mcp-atlassian
     command: ["--transport", "sse", "--port", "8000"]
+    ports:
+      - "8101:8000"
     environment:
       # Jira Cloud
       - JIRA_URL=${JIRA_URL:-}
@@ -84,6 +91,8 @@ services:
   mcp-context7:
     image: mcp/context7
     container_name: mcp-context7
+    ports:
+      - "8102:3000"
     environment:
       - TRANSPORT=sse
       - PORT=3000

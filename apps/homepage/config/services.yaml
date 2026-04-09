@@ -36,10 +36,28 @@
         icon: mdi-robot-industrial
         href: http://mission-control.openclaw.home
         description: OpenClaw mission control dashboard
+
+- MCP:
+    - MCPO Gateway:
+        icon: mdi-robot
+        href: http://mcp.home
+        description: MCP aggregator - all server endpoints
     - MCP Inspector:
         icon: mdi-microscope
-        href: http://mcp-inspector.home
+        href: http://inspector.mcp.home
         description: Inspect and debug MCP server connections
+    - MCP Atlassian:
+        icon: atlassian
+        href: http://atlassian.mcp.home/sse
+        description: Jira and Confluence MCP SSE endpoint
+    - MCP Context7:
+        icon: mdi-book-open-variant
+        href: http://context7.mcp.home/mcp
+        description: Library documentation lookup MCP endpoint
+    - MCP Elasticsearch:
+        icon: elasticsearch
+        href: http://elasticsearch.mcp.home/sse
+        description: Elasticsearch search MCP SSE endpoint
 
 - OrangePi5B:
     - OpenHAB:

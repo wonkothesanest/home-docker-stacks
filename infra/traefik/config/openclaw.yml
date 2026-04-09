@@ -1,11 +1,4 @@
 http:
-  middlewares:
-    openclaw-strip:
-      stripPrefix:
-        prefixes:
-          - "/openclaw"
-
-
   routers:
     openclaw:
       rule: "Host(`orangepi5b.coho-teeth.ts.net`) && PathPrefix(`/openclaw`)"
@@ -13,8 +6,6 @@ http:
         - websecure
       tls:
         certResolver: tailscale
-      middlewares:
-        - openclaw-strip
       service: openclaw
 
   services:

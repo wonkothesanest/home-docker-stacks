@@ -1,5 +1,6 @@
 services:
   openclaw-gateway:
+    user: "1001:1001"
     image: ${OPENCLAW_IMAGE:-openclaw:local}
     environment:
       HOME: /home/node
@@ -48,6 +49,7 @@ services:
       start_period: 20s
 
   openclaw-cli:
+    user: "1001:1001"
     image: ${OPENCLAW_IMAGE:-openclaw:local}
     network_mode: "service:openclaw-gateway"
     cap_drop:

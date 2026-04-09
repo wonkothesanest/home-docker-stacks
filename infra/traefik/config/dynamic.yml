@@ -169,6 +169,20 @@ http:
         - "web"
       service: "work-rag"
 
+    # Mission Control
+    mission-control:
+      rule: "Host(`mission-control.openclaw.home`)"
+      entryPoints:
+        - "web"
+      service: "mission-control"
+
+    # Reports AI Explorer
+    reports-omnidian:
+      rule: "Host(`reports.omnidian.home`)"
+      entryPoints:
+        - "web"
+      service: "reports-omnidian"
+
 
 
   # Services define backend servers
@@ -307,6 +321,18 @@ http:
       loadBalancer:
         servers:
           - url: "http://wonko.local:8000"
+
+    # Mission Control on orangepi5b
+    mission-control:
+      loadBalancer:
+        servers:
+          - url: "http://orangepi5b.local:3011"
+
+    # Reports AI Explorer on orangepi5b
+    reports-omnidian:
+      loadBalancer:
+        servers:
+          - url: "http://orangepi5b.local:8765"
 
 
 

@@ -23,11 +23,19 @@
     - N8N:
         icon: n8n
         href: http://n8n.home
+    - Reports AI Explorer:
+        icon: mdi-file-chart
+        href: http://reports.omnidian.home
+        description: Reports explorer for Omnidian
 
 - LLMs:
     - OpenWebUI:
         icon: openwebui
         href: http://openwebui.home
+    - Mission Control:
+        icon: mdi-robot-industrial
+        href: http://mission-control.openclaw.home
+        description: OpenClaw mission control dashboard
     - MCP Inspector:
         icon: mdi-microscope
         href: http://mcp-inspector.home

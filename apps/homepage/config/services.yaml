@@ -34,7 +34,7 @@
         href: http://openwebui.home
     - Mission Control:
         icon: mdi-robot-industrial
-        href: http://mission-control.openclaw.home
+        href: https://mission-control.coho-teeth.ts.net/office
         description: OpenClaw mission control dashboard
 
 - MCP:

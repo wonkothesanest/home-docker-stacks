@@ -32,10 +32,22 @@
     - OpenWebUI:
         icon: openwebui
         href: http://openwebui.home
+    - OpenClaw:
+        icon: mdi-robot
+        href: https://openclaw.coho-teeth.ts.net/
+        description: OpenClaw control UI
+    - GoblinClaw:
+        icon: mdi-robot-happy
+        href: https://goblinclaw.coho-teeth.ts.net/
+        description: GoblinClaw control UI
     - Mission Control:
         icon: mdi-robot-industrial
         href: https://mission-control.coho-teeth.ts.net/office
         description: OpenClaw mission control dashboard
+    - Goblin Control:
+        icon: mdi-chart-line
+        href: https://goblin-control.coho-teeth.ts.net/office
+        description: GoblinClaw mission control dashboard
 
 - MCP:
     - MCPO Gateway:
@@ -105,3 +117,11 @@
         icon: api
         href: http://api.trading-agents.trade-goblin.home/docs
         description: API for trading agents (custom service)
+    - Hoardmaster:
+        icon: mdi-treasure-chest
+        href: http://hoardmaster.tradegoblin.home/docs
+        description: Hoardmaster control-plane API docs
+    - Hoardmaster Health:
+        icon: mdi-heart-pulse
+        href: http://hoardmaster.tradegoblin.home/api/governance/health
+        description: Hoardmaster governance API health endpoint

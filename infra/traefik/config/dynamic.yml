@@ -197,6 +197,13 @@ http:
         - "web"
       service: "mission-control"
 
+    # Goblin Control
+    goblin-control:
+      rule: "Host(`goblin-control.openclaw.home`)"
+      entryPoints:
+        - "web"
+      service: "goblin-control"
+
     # Reports AI Explorer
     reports-omnidian:
       rule: "Host(`reports.omnidian.home`)"
@@ -366,6 +373,12 @@ http:
       loadBalancer:
         servers:
           - url: "http://orangepi5b.local:3011"
+
+    # Goblin Control on orangepi5b
+    goblin-control:
+      loadBalancer:
+        servers:
+          - url: "http://orangepi5b.local:3012"
 
     # Reports AI Explorer on orangepi5b
     reports-omnidian:

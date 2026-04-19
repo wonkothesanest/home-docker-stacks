@@ -1,15 +1,22 @@
 http:
   routers:
     openclaw:
-      rule: "Host(`orangepi5b.coho-teeth.ts.net`) && PathPrefix(`/openclaw`)"
+      rule: "Host(`openclaw.home`)"
       entryPoints:
-        - websecure
-      tls:
-        certResolver: tailscale
+        - web
       service: openclaw
+    goblinclaw:
+      rule: "Host(`goblinclaw.home`)"
+      entryPoints:
+        - web
+      service: goblinclaw
 
   services:
     openclaw:
       loadBalancer:
         servers:
           - url: "http://orangepi5b.local:18789"
+    goblinclaw:
+      loadBalancer:
+        servers:
+          - url: "http://orangepi5b.local:18889"

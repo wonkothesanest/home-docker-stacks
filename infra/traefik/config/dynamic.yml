@@ -368,17 +368,17 @@ http:
         servers:
           - url: "http://wonko.local:8000"
 
-    # Mission Control on orangepi5b
+    # Mission Control on ford
     mission-control:
       loadBalancer:
         servers:
-          - url: "http://orangepi5b.local:3011"
+          - url: "http://ford.local:3011"
 
-    # Goblin Control on orangepi5b
+    # Goblin Control on ford
     goblin-control:
       loadBalancer:
         servers:
-          - url: "http://orangepi5b.local:3012"
+          - url: "http://ford.local:3012"
 
     # Reports AI Explorer on orangepi5b
     reports-omnidian:

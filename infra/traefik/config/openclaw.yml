@@ -15,8 +15,8 @@ http:
     openclaw:
       loadBalancer:
         servers:
-          - url: "http://orangepi5b.local:18789"
+          - url: "http://ford.local:18789"
     goblinclaw:
       loadBalancer:
         servers:
-          - url: "http://orangepi5b.local:18889"
+          - url: "http://ford.local:18889"

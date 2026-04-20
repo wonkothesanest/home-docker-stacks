@@ -54,8 +54,8 @@ services:
     extra_hosts:
       - "wonko.local:192.168.50.41"
       - "wonko:192.168.50.41"
-      - "orangepi5b.local:192.168.50.40"
-      - "orangepi5b:192.168.50.40"
+      - "ford.local:192.168.50.44"
+      - "ford:192.168.50.44"
       - "pi.hole:192.168.50.40"
 
     labels:

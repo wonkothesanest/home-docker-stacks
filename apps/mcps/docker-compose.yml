@@ -51,7 +51,7 @@ services:
     ports:
       - "8103:3000"
     environment:
-      - ES_URL=${ELASTICSEARCH_HOSTS:-http://wonko.local:9200}
+      - ES_URL=${ELASTICSEARCH_HOSTS:-http://elasticsearch.home}
       - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-}
       - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD:-}
       - ES_API_KEY=${ELASTICSEARCH_API_KEY:-}

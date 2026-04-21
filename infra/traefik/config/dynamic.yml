@@ -267,7 +267,7 @@ http:
     mcp:
       loadBalancer:
         servers:
-          - url: "http://wonko.local:8100"
+          - url: "http://ford.local:8100"
 
     # MCP Atlassian SSE endpoint
     mcp-atlassian:
@@ -279,13 +279,13 @@ http:
     mcp-context7:
       loadBalancer:
         servers:
-          - url: "http://wonko.local:8102"
+          - url: "http://ford.local:8102"
 
     # MCP Elasticsearch SSE endpoint
     mcp-elasticsearch-server:
       loadBalancer:
         servers:
-          - url: "http://wonko.local:8103"
+          - url: "http://ford.local:8103"
 
     # Pi-hole service pointing to localhost:8082 (runs on orangepi5b with host networking)
     pihole:
@@ -373,7 +373,7 @@ http:
     mcp-inspector:
       loadBalancer:
         servers:
-          - url: "http://wonko.local:6274"
+          - url: "http://ford.local:6274"
 
     # Work RAG - MCP server for work domain
     work-rag:

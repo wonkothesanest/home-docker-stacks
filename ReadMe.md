@@ -12,6 +12,8 @@ This repository contains Docker Compose stacks organized by purpose and host:
   - n8n, Postgres, and Editly (`apps/n8n-stack`)
   - Prefect Server (`apps/prefect-stack`)
   - Elasticsearch + Kibana (`data/search-stack`)
+  - RabbitMQ (`data/rabbitmq`)
+  - Redis (`data/redis`)
 
 ## Stack Configuration
 

@@ -23,6 +23,8 @@ This repository contains Docker Compose stacks for a multi-host home infrastruct
 - n8n + Postgres + Editly (apps/n8n-stack) - Workflow automation and video editing
 - Prefect Server (apps/prefect-stack) - Workflow orchestration
 - Elasticsearch + Kibana (data/search-stack) - Search and analytics
+- RabbitMQ (data/rabbitmq) - Message broker with management UI
+- Redis (data/redis) - In-memory cache and lightweight data store
 - Neo4j + NeoDash (data/neo4j) - Graph database and visualization
 - Homepage (apps/homepage) - Dashboard with custom Docker build
 - MCP Server (infra/mcp) - Model Context Protocol server with ES integration
@@ -181,6 +183,8 @@ Key service ports:
 - Prefect: 4200 (UI), 8080 (API)
 - Elasticsearch: 9200
 - Kibana: 5601
+- RabbitMQ: 5672 (AMQP), 15672 (management UI)
+- Redis: 6379
 - Neo4j: 7475 (HTTP), 7688 (Bolt)
 - NeoDash: 5005
 - Zigbee2MQTT: 8081
@@ -211,3 +215,19 @@ When adding new stacks:
 3. Add `.env.example` with all required variables
 4. Update this CLAUDE.md with stack purpose and any special requirements
 5. Update ReadMe.md host overview if applicable
+
+### Data Services Added
+
+**RabbitMQ (data/rabbitmq)**
+- Uses `rabbitmq:3.13-management`
+- AMQP available on port `5672`
+- Management UI available on port `15672`
+- Credentials come from `.env`
+- Persistent data stored in named volume `rabbitmq_data`
+
+**Redis (data/redis)**
+- Uses `redis:7.4-alpine`
+- Password-protected on port `6379`
+- AOF persistence enabled via `--appendonly yes`
+- Credentials come from `.env`
+- Persistent data stored in named volume `redis_data`

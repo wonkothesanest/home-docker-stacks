@@ -120,6 +120,13 @@ http:
         - "web"
       service: "rabbitmq"
 
+    # Redis Commander - Redis web UI
+    redis-commander:
+      rule: "Host(`redis.home`)"
+      entryPoints:
+        - "web"
+      service: "redis-commander"
+
     # OpenHAB - Home automation platform
     openhab:
       rule: "Host(`openhab.home`)"
@@ -303,11 +310,17 @@ http:
         servers:
           - url: "http://orangepi5b.local:9002"
 
-    # RabbitMQ management interface pointing to orangepi5b:15672
+    # RabbitMQ management interface pointing to ford:15672
     rabbitmq:
       loadBalancer:
         servers:
-          - url: "http://orangepi5b.local:15672"
+          - url: "http://ford.local:15672"
+
+    # Redis Commander UI pointing to ford:6380
+    redis-commander:
+      loadBalancer:
+        servers:
+          - url: "http://ford.local:6380"
 
     # OpenHAB pointing to orangepi5b:8080
     openhab:
@@ -380,11 +393,11 @@ http:
         servers:
           - url: "http://ford.local:3012"
 
-    # Reports AI Explorer on orangepi5b
+    # Reports AI Explorer on ford
     reports-omnidian:
       loadBalancer:
         servers:
-          - url: "http://orangepi5b.local:8765"
+          - url: "http://ford.local:8765"
 
 
 

@@ -15,7 +15,7 @@ services:
       - "--providers.docker.exposedbydefault=false"
 
       # File Provider (for wonko.local services)
-      - "--providers.file.directory=/etc/traefik/config"
+      - "--providers.file.filename=/etc/traefik/dynamic.yml"
       - "--providers.file.watch=true"
       
       # Tailscale certificate resolver
@@ -46,7 +46,8 @@ services:
 
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"  # Docker API access for local containers
-      - "./config:/etc/traefik/config:ro"                # File provider config directory
+      - "/home/node/home-docker-stacks/infra/traefik/config/dynamic.yml:/etc/traefik/dynamic.yml:ro"  # File provider dynamic config
+      - "/home/node/home-docker-stacks/infra/traefik/config/openclaw.yml:/etc/traefik/openclaw.yml:ro"  # File provider openclaw config
       - "/var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock"
     networks:
       - traefik-network

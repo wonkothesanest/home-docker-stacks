@@ -78,10 +78,16 @@ services:
       - JIRA_URL=${JIRA_URL:-}
       - JIRA_USERNAME=${JIRA_USERNAME:-}
       - JIRA_API_TOKEN=${JIRA_API_TOKEN:-}
-      
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mcp-atlassian.rule=Host(`atlassian.mcp.home`)"
+      - "traefik.http.routers.mcp-atlassian.entrypoints=web"
+      - "traefik.http.services.mcp-atlassian.loadbalancer.server.port=8000"
+      - "traefik.docker.network=traefik-network"
     restart: unless-stopped
     networks:
       - mcp-network
+      - traefik-network
 
   # ---------------------------------------------------------------------------
   # MCP Context7 - Up-to-date library documentation lookup
@@ -105,3 +111,6 @@ networks:
   mcp-network:
     name: mcp-network
     driver: bridge
+  traefik-network:
+    external: true
+    name: traefik-network

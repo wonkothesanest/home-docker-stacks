@@ -273,7 +273,7 @@ http:
     mcp-atlassian:
       loadBalancer:
         servers:
-          - url: "http://wonko.local:8101"
+          - url: "http://ford.local:8101"
 
     # MCP Context7 SSE endpoint
     mcp-context7:

@@ -84,9 +84,14 @@
     - Mosquitto MQTT Broker:
         icon: mqtt
         href: http://mosquitto.home
-    - Rabbit MQ:
+    - RabbitMQ:
         icon: rabbitmq
         href: http://rabbitmq.home
+        description: Message broker management UI
+    - Redis Commander:
+        icon: redis
+        href: http://redis.home
+        description: Redis cache browser and admin UI
 
 - Networking:
     - Pi-hole:
